@@ -168,66 +168,66 @@ public class Coordinador {
 	
 	public void setName(String name) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Nombre= '" + name + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET Nombre= '" + name + "' WHERE ID=" + this.id + ";");
 		this.name = name;
 	}
 	public void setSurname(String surname) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Apellidos= '" + surname + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET Apellidos= '" + surname + "' WHERE ID=" + this.id + ";");
 		this.surname = surname;
 	}
 	public void setSex(String sex) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Sexo= '" + sex + "' WHERE ID=" + this.id + ";");
+       	 	myDB.Update("UPDATE Coordinador SET Sexo= '" + sex + "' WHERE ID=" + this.id + ";");
 		this.sex = sex;
 	}
 	public void setBirthDate(Date birthDate) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-       	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
-        String DateToStr = format.format(birthDate); 
+       		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+        	String DateToStr = format.format(birthDate); 
         	
-        myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
 		this.birthDate = birthDate;
 	}
 	public void setEntryDate(Date entryDate) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-       	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
-        String DateToStr = format.format(entryDate); 
+       		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+        	String DateToStr = format.format(entryDate); 
         	
-        myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
 		this.entryDate = entryDate;
 	}
 	public void setExitDate(Date exitDate) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-       	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
-        String DateToStr = format.format(entryDate); 
+       		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
+        	String DateToStr = format.format(entryDate); 
         	
-        myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
 		this.exitDate = exitDate;
 	}
 	public void setPrivilege(int privilege) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Privilegios=" + privilege + " WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET Privilegios=" + privilege + " WHERE ID=" + this.id + ";");
 		this.privilege = privilege;
 	}
 	public void setAddress(String address) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Direcccion='" + address + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET Direcccion='" + address + "' WHERE ID=" + this.id + ";");
 		this.address = address;
 	}
 	public void setPhoneNumber(int phoneNumber) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Telefono=" + privilege + " WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET Telefono=" + privilege + " WHERE ID=" + this.id + ";");
 		this.phoneNumber = phoneNumber;
 	}
 	public void setJob(String job) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Trabajo='" + job + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET Trabajo='" + job + "' WHERE ID=" + this.id + ";");
 		this.job = job;
 	}
 	public void setComments(String comments) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Coordinador SET Observaciones='" + comments + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET Observaciones='" + comments + "' WHERE ID=" + this.id + ";");
 		this.comments = comments;
 	}
     
