@@ -44,7 +44,7 @@ public class Beneficiario {
     }
 
     public void setIdCoordinator(int idCoordinator) {
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET Agente="+idCoordinator+"WHERE ID="+this.id);
         this.idCoordinator = idCoordinator;
     }
@@ -54,7 +54,7 @@ public class Beneficiario {
     }
 
     public void setName(String name) {
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET Nombre='"+name+"' WHERE ID="+this.id);
         this.name = name;
     }
@@ -64,7 +64,7 @@ public class Beneficiario {
     }
 
     public void setSurname(String surname) {
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET Apellido='"+surname+"' WHERE ID="+this.id);
         this.surname = surname;
     }
@@ -74,7 +74,7 @@ public class Beneficiario {
     }
 
     public void setSex(String sex) {
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET Sexo='"+sex+"' WHERE ID="+this.id);
         this.sex = sex;
     }
@@ -84,7 +84,7 @@ public class Beneficiario {
     }
 
     public void setBirthDate(Date birthDate) {
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String birthDateToStr = format.format(birthDate);
@@ -98,7 +98,7 @@ public class Beneficiario {
     }
 
     public void setEntryDate(Date entryDate) {
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String entryDateToStr = format.format(entryDate);
@@ -112,7 +112,7 @@ public class Beneficiario {
     }
 
     public void setExitDate(Date exitDate) {
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String exitDateToStr = format.format(exitDate);
@@ -127,7 +127,7 @@ public class Beneficiario {
 
     public void setProjectJoinDate(Date projectJoinDate) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String projectJoinDateToStr = format.format(projectJoinDate);
@@ -142,7 +142,7 @@ public class Beneficiario {
 
     public void setProjectEndDate(Date projectEndDate) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String projectendDateToStr = format.format(projectEndDate);
@@ -157,7 +157,7 @@ public class Beneficiario {
 
     public void setBeca(String beca) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET Beca='"+beca+"' WHERE ID="+this.id);
 
         this.beca = beca;
@@ -169,7 +169,7 @@ public class Beneficiario {
 
     public void setProject(String project) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET Proyecto='"+project+"' WHERE ID="+this.id);
 
         this.project = project;
@@ -181,7 +181,7 @@ public class Beneficiario {
 
     public void setCourseGrade(float courseGrade) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET NotaCurso="+courseGrade+"WHERE ID="+this.id);
         this.sex = sex;
 
@@ -194,7 +194,7 @@ public class Beneficiario {
 
     public void setBirthPlace(String birthPlace) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET ComunidadNacimiento='"+birthPlace+"' WHERE ID="+this.id);
 
         this.birthPlace = birthPlace;
@@ -206,7 +206,7 @@ public class Beneficiario {
 
     public void setLivingPlace(String livingPlace) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET ComunidadViviendo='"+livingPlace+"' WHERE ID="+this.id);
 
         this.livingPlace = livingPlace;
@@ -218,7 +218,7 @@ public class Beneficiario {
 
     public void setComments(String comments) {
 
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Update("Update Beneficiario SET Observaciones='"+comments+"' WHERE ID="+this.id);
 
         this.comments = comments;
@@ -228,7 +228,7 @@ public class Beneficiario {
     public static List<Beneficiario> BeneficiaryList(){
         //retorna una lista de beneficiarios
         List<Beneficiario> myList= new ArrayList<Beneficiario>();
-        DB myDB = new DB(DB_Server,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
 
         for (Object[] tupla : myDB.Select("SELECT * FROM Beneficiario")){
             Beneficiario b = new Beneficiario((int)tupla[0]);
@@ -238,7 +238,7 @@ public class Beneficiario {
     }
     public Beneficiario(int id){
         //Crea el objeto cargando sus valores de la base de datos
-        DB myDB = new DB(DB_Server,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         Object[] tupla = myDB.Select("SELECT * FROM Beneficiario WHERE ID = "+id+";").get(0);
 
         this.id=(int)tupla[0];
@@ -269,7 +269,7 @@ public class Beneficiario {
 
 
 
-        myDB = new BD (DB_Server,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Insert("INSERT INTO Beneficiario VALUES("+idCoordinador+", '"+name+"', '"+ surename+"', '"+sex+"', '"+birthDateToStr+"', '"+entryDateToStr+"', '"+exitDateToStr+"', '"+projectJoinDateToStr+"', '"+projectEndDateToStr+"', '"+beca+"', '"+project+"', "+courseGrade+", '"+birthPlace+"', '"+livingPlace+"', '"+comments+")1,");
         Object[] tupla = myDB.Select("SELECT @@IDENTITY").get(0);
         this.id= Integer.valueOf(((Number)tupla[0]).intValue());
@@ -290,7 +290,7 @@ public class Beneficiario {
         this.comments=comments;
     }
     public void DeleteBeneficiary(){
-        DB myDB = new DB(DB_SERVER,DB_NAME);
+        DB myDB = new DB(BD_SERVER,BD_NAME);
         myDB.Delete("DELETE FROM Beneficiario WHERE id ="+this.id+";");
         this.id=0;
         this.idCoordinator=-1;
