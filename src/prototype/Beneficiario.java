@@ -10,8 +10,8 @@ public class Beneficiario {
 
 
 
-    private static String BD_SERVER = "";
-    private static String BD_NAME = "";
+    private static String DB_SERVER = "";
+    private static String DB_NAME = "";
 
     private int id;
     private int idCoordinator;
@@ -269,7 +269,7 @@ public class Beneficiario {
 
 
 
-        myDB = new BD (DB_Server,DB_NAME);
+        myDB = new DB (DB_Server,DB_NAME);
         myDB.Insert("INSERT INTO Beneficiario VALUES("+idCoordinador+", '"+name+"', '"+ surename+"', '"+sex+"', '"+birthDateToStr+"', '"+entryDateToStr+"', '"+exitDateToStr+"', '"+projectJoinDateToStr+"', '"+projectEndDateToStr+"', '"+beca+"', '"+project+"', "+courseGrade+", '"+birthPlace+"', '"+livingPlace+"', '"+comments+")1,");
         Object[] tupla = myDB.Select("SELECT @@IDENTITY").get(0);
         this.id= Integer.valueOf(((Number)tupla[0]).intValue());
