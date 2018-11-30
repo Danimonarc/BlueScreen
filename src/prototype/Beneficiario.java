@@ -10,8 +10,8 @@ public class Beneficiario {
 
 
 
-    private static String DB_SERVER = "";
-    private static String DB_NAME = "";
+    private static String DB_SERVER = "localhost";
+    private static String DB_NAME = "BlueCoes";
 
     private int id;
     private int idCoordinator;
@@ -26,7 +26,7 @@ public class Beneficiario {
     private Date projectEndDate;
     private String beca;
     private String project;
-    private float courseGrade;
+    private int courseGrade;
     private String birthPlace;
     private String livingPlace;
     private String comments;
@@ -85,11 +85,9 @@ public class Beneficiario {
 
     public void setBirthDate(Date birthDate) {
         DB myDB = new DB(DB_SERVER,DB_NAME);
+        String birthDateToStr = formatDate(birthDate);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String birthDateToStr = format.format(birthDate);
-
-        myDB.Update("Update Beneficiario SET FechaNacimiento='"+birthDateToStr+"' WHERE ID="+this.id);
+        myDB.Update("Update Beneficiario SET FechaNacimiento= " + birthDateToStr + " WHERE ID="+this.id);
         this.birthDate = birthDate;
     }
 
@@ -99,11 +97,9 @@ public class Beneficiario {
 
     public void setEntryDate(Date entryDate) {
         DB myDB = new DB(DB_SERVER,DB_NAME);
+        String entryDateToStr = formatDate(entryDate);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String entryDateToStr = format.format(entryDate);
-
-        myDB.Update("Update Beneficiario SET FechaEntrada='"+entryDateToStr+"' WHERE ID="+this.id);
+        myDB.Update("Update Beneficiario SET FechaEntrada= " + entryDateToStr + " WHERE ID="+this.id);
         this.entryDate = entryDate;
     }
 
@@ -113,11 +109,9 @@ public class Beneficiario {
 
     public void setExitDate(Date exitDate) {
         DB myDB = new DB(DB_SERVER,DB_NAME);
+        String exitDateToStr = formatDate(exitDate);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String exitDateToStr = format.format(exitDate);
-
-        myDB.Update("Update Beneficiario SET FechaSalida='"+exitDateToStr+"' WHERE ID="+this.id);
+        myDB.Update("Update Beneficiario SET FechaSalida= " + exitDateToStr + " WHERE ID="+this.id);
         this.exitDate = exitDate;
     }
 
@@ -126,13 +120,10 @@ public class Beneficiario {
     }
 
     public void setProjectJoinDate(Date projectJoinDate) {
-
         DB myDB = new DB(DB_SERVER,DB_NAME);
+        String projectJoinDateToStr = formatDate(projectJoinDate);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String projectJoinDateToStr = format.format(projectJoinDate);
-
-        myDB.Update("Update Beneficiario SET FechaAltaProyecto='"+projectJoinDateToStr+"' WHERE ID="+this.id);
+        myDB.Update("Update Beneficiario SET FechaAltaProyecto= " + projectJoinDateToStr + " WHERE ID="+this.id);
         this.projectJoinDate = projectJoinDate;
     }
 
@@ -141,13 +132,10 @@ public class Beneficiario {
     }
 
     public void setProjectEndDate(Date projectEndDate) {
-
         DB myDB = new DB(DB_SERVER,DB_NAME);
+        String projectendDateToStr = formatDate(projectEndDate);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String projectendDateToStr = format.format(projectEndDate);
-
-        myDB.Update("Update Beneficiario SET FechaBajaProyecto='"+projectendDateToStr+"' WHERE ID="+this.id);
+        myDB.Update("Update Beneficiario SET FechaBajaProyecto= " + projectendDateToStr + " WHERE ID="+this.id);
         this.projectEndDate = projectEndDate;
     }
 
@@ -175,15 +163,14 @@ public class Beneficiario {
         this.project = project;
     }
 
-    public float getCourseGrade() {
+    public int getCourseGrade() {
         return courseGrade;
     }
 
-    public void setCourseGrade(float courseGrade) {
+    public void setCourseGrade(int courseGrade) {
 
         DB myDB = new DB(DB_SERVER,DB_NAME);
         myDB.Update("Update Beneficiario SET NotaCurso="+courseGrade+"WHERE ID="+this.id);
-        this.sex = sex;
 
         this.courseGrade = courseGrade;
     }
@@ -228,7 +215,7 @@ public class Beneficiario {
     public static List<Beneficiario> BeneficiaryList(){
         //retorna una lista de beneficiarios
         List<Beneficiario> myList= new ArrayList<Beneficiario>();
-        DB myDB = new DB(DB_Server,DB_NAME);
+        DB myDB = new DB(DB_SERVER,DB_NAME);
 
         for (Object[] tupla : myDB.Select("SELECT * FROM Beneficiario")){
             Beneficiario b = new Beneficiario((int)tupla[0]);
@@ -238,8 +225,8 @@ public class Beneficiario {
     }
     public Beneficiario(int id){
         //Crea el objeto cargando sus valores de la base de datos
-        DB myDB = new DB(DB_Server,DB_NAME);
-        Object[] tupla = myDB.Select("SELECT * FROM Beneficiario WHERE ID = "+id+";").get(0);
+        DB myDB = new DB(DB_SERVER,DB_NAME);
+        Object[] tupla = myDB.Select("SELECT * FROM Beneficiario WHERE ID = "+ id+";").get(0);
 
         this.id=(int)tupla[0];
         this.idCoordinator=(int)tupla[1];
@@ -254,34 +241,31 @@ public class Beneficiario {
         this.projectEndDate=(Date)tupla[10];
         this.beca=(String)tupla[11];
         this.project=(String)tupla[12];
-        this.courseGrade=(Float)tupla[13];
+        this.courseGrade=(int)tupla[13];
         this.birthPlace=(String)tupla[14];
         this.livingPlace=(String)tupla[15];
         this.comments=(String)tupla[16];
     }
-    public Beneficiario(int idCoordinador, String name, String surename, String sex, Date birthDate,Date entryDate, Date exitDate, Date projectJoinDate, Date projectEndDate, String beca, String project, float courseGrade, String birthPlace, String livingPlace, String comments){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String birthDateToStr = format.format(this.birthDate);
-        String entryDateToStr = format.format(this.entryDate);
-        String exitDateToStr = format.format(this.exitDate);
-        String projectJoinDateToStr = format.format(this.projectJoinDate);
-        String projectEndDateToStr = format.format(this.projectEndDate);
+    public Beneficiario(int idCoordinador, String name, String surname, String sex, Date birthDate, Date entryDate, Date exitDate, Date projectJoinDate, Date projectEndDate, String beca, String project, int courseGrade, String birthPlace, String livingPlace, String comments){
+		String birthDateToStr = formatDate(birthDate);
+		String entryDateToStr = formatDate(entryDate);
+		String exitDateToStr = formatDate(exitDate);
+		String projectJoinDateToStr = formatDate(projectJoinDate);
+		String projectEndDateToStr = formatDate(projectEndDate);
 
-
-
-        myDB = new DB (DB_Server,DB_NAME);
-        myDB.Insert("INSERT INTO Beneficiario VALUES("+idCoordinador+", '"+name+"', '"+ surename+"', '"+sex+"', '"+birthDateToStr+"', '"+entryDateToStr+"', '"+exitDateToStr+"', '"+projectJoinDateToStr+"', '"+projectEndDateToStr+"', '"+beca+"', '"+project+"', "+courseGrade+", '"+birthPlace+"', '"+livingPlace+"', '"+comments+")1,");
+        DB myDB = new DB (DB_SERVER, DB_NAME);
+        myDB.Insert("INSERT INTO Beneficiario VALUES("+idCoordinador+", '"+name+"', '"+ surname+"'," + null + ", '" + sex + "', "+birthDateToStr+", "+entryDateToStr+", "+exitDateToStr+", "+projectJoinDateToStr+", "+projectEndDateToStr+", '"+beca+"', '"+project+"', "+courseGrade+", '"+birthPlace+"', '"+livingPlace+"', '"+comments+"');");
         Object[] tupla = myDB.Select("SELECT @@IDENTITY").get(0);
         this.id= Integer.valueOf(((Number)tupla[0]).intValue());
         this.idCoordinator=idCoordinador;
         this.name = name;
-        this.surname=surename;
+        this.surname=surname;
         this.sex=sex;
-        this.birthDate=birthDate;
-        this.entryDate=entryDate;
-        this.exitDate=exitDate;
-        this.projectJoinDate=projectJoinDate;
-        this.projectEndDate=projectEndDate;
+		this.birthDate=birthDate;
+		this.entryDate=entryDate;
+		this.exitDate=exitDate;
+		this.projectJoinDate=projectJoinDate;
+		this.projectEndDate=projectEndDate;
         this.beca=beca;
         this.project=project;
         this.courseGrade=courseGrade;
@@ -309,11 +293,22 @@ public class Beneficiario {
         this.livingPlace=null;
         this.comments=null;
     }
+    
+    public String formatDate(Date date){
+    	if(date!=null) {
+    		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	return "'" + format.format(date) + "'";
+    	} else {
+    		return null;
+    	}
+    	
+    }
+    
     public String toString(){
         return id+"->"+" "+name+" "+surname+" \n\t"+"id del coordinador: "+idCoordinator+"\n\t"+"genero: "+sex+"\n\t"+
         "Fecha de nacimiento: "+birthDate+"\n\tFecha de entrada: "+entryDate+"\n\tFecha de salida: "+exitDate+"\n\tFecha de union a proyecto"+
         "\n\tFecha de finalizacion de proyecto : "+projectEndDate+"\n\tTrabajando en el proyecto: "+project+"\n\tCon la beca: "+beca+
-        "\n\tNota del curso: "+courseGrade+"\n\t Nacido en: "+birthPlace+"\n\tViviendo en"+livingPlace+"\n\n\tComentarios: "+"\n"+comments;
+        "\n\tNota del curso: "+courseGrade+"\n\tNacido en: "+birthPlace+"\n\tViviendo en"+livingPlace+"\n\n\tComentarios: "+"\n"+comments;
     }
 }
 

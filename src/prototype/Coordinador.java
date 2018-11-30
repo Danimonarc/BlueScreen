@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Coordinador {
-	private static String DB_SERVER = "DESKTOP-6289C7L\\SQLEXPRESS";
-    private static String DB_NAME = "GI1819";
+	private static String DB_SERVER = "localhost";
+    private static String DB_NAME = "BlueCoes";
     
     private int id;
     private String name;
@@ -19,7 +19,7 @@ public class Coordinador {
     private Date exitDate;
     private int privilege;
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
     private String job;
     private String comments;
     
@@ -44,32 +44,31 @@ public class Coordinador {
     	
     	this.id = (int)tupla[0];
     	this.name = (String)tupla[1];
-        this.surname = (String)tupla[2];
+    	this.surname = (String)tupla[2];
         //this.image = (Image)tupla[3];
-        this.sex = (String)tupla[4];
-        this.birthDate = (Date)tupla[5];
-        this.entryDate = (Date)tupla[6];
-        this.exitDate = (Date)tupla[7];
-        this.privilege = (int)tupla[8];
-        this.address = (String)tupla[9];
-        this.phoneNumber = (int)tupla[10];
-        this.job = (String)tupla[11];
-        this.comments = (String)tupla[12];
+    	this.sex = (String)tupla[4];
+    	this.birthDate = (Date)tupla[5];
+    	this.entryDate = (Date)tupla[6];
+    	this.exitDate = (Date)tupla[7];
+    	this.privilege = (int)tupla[8];
+    	this.address = (String)tupla[9];
+    	this.phoneNumber = (String)tupla[10];
+    	this.job = (String)tupla[11];
+    	this.comments = (String)tupla[12];
     }
     
-    public Coordinador(String name, String surname, String sex, Date birthDate, Date entryDate, Date exitDate, int privilege, String address, int phoneNumber, String job, String comments) //TODO: image
+    public Coordinador(String name, String surname, String sex, Date birthDate, Date entryDate, Date exitDate, int privilege, String address, String phoneNumber, String job, String comments) //TODO: image
     {
     	// Da formato a las fechas para insertarlas en la base de datos
-    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
-        String birthDateToStr = format.format(this.birthDate); 
-        String entryDateToStr = format.format(this.entryDate); 
-        String exitDateToStr = format.format(this.exitDate); 
+        String birthDateToStr = formatDate(birthDate); 
+        String entryDateToStr = formatDate(entryDate); 
+        String exitDateToStr = formatDate(exitDate); 
     	
 		// Crea el objeto y lo inserta en la base de datos
     	DB myDB = new DB(DB_SERVER,DB_NAME);
     	myDB.Insert("INSERT INTO Coordinador VALUES('" + name +
-    			"', '" + surname + "', '" + sex + "', '" + birthDateToStr +
-    			"', '" + entryDateToStr + "', '" + exitDateToStr + "', " + privilege + 
+    			"', '" + surname + "', '" + sex + "', " + birthDateToStr +
+    			", " + entryDateToStr + ", " + exitDateToStr + ", " + privilege + 
     			", '" + address + "', " + phoneNumber + ", '" + job +
     			"', '" + comments + "');");
     	
@@ -106,9 +105,19 @@ public class Coordinador {
      	this.exitDate = null;
      	this.privilege = -1;
      	this.address = null;
-     	this.phoneNumber = -1;
+     	this.phoneNumber = null;
      	this.job = null;
      	this.comments = null;
+    }
+    
+    public String formatDate(Date date){
+    	if(date!=null) {
+    		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	return "'" + format.format(date) + "'";
+    	} else {
+    		return null;
+    	}
+    	
     }
     
     public String toString()
@@ -152,7 +161,7 @@ public class Coordinador {
 	public String getAddress() {
 		return address;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	public String getJob() {
@@ -183,26 +192,23 @@ public class Coordinador {
 	}
 	public void setBirthDate(Date birthDate) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-       		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
-        	String DateToStr = format.format(birthDate); 
+        	String DateToStr = formatDate(birthDate); 
         	
-        	myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET FechaNacimiento=" + DateToStr + " WHERE ID=" + this.id + ";");
 		this.birthDate = birthDate;
 	}
 	public void setEntryDate(Date entryDate) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-       		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
-        	String DateToStr = format.format(entryDate); 
+        	String DateToStr = formatDate(entryDate); 
         	
-        	myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET FechaNacimiento=" + DateToStr + " WHERE ID=" + this.id + ";");
 		this.entryDate = entryDate;
 	}
 	public void setExitDate(Date exitDate) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
-       		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
-        	String DateToStr = format.format(entryDate); 
+        	String DateToStr = formatDate(exitDate); 
         	
-        	myDB.Update("UPDATE Coordinador SET FechaNacimiento='" + DateToStr + "' WHERE ID=" + this.id + ";");
+        	myDB.Update("UPDATE Coordinador SET FechaNacimiento=" + DateToStr + " WHERE ID=" + this.id + ";");
 		this.exitDate = exitDate;
 	}
 	public void setPrivilege(int privilege) {
@@ -215,7 +221,7 @@ public class Coordinador {
         	myDB.Update("UPDATE Coordinador SET Direcccion='" + address + "' WHERE ID=" + this.id + ";");
 		this.address = address;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		DB myDB = new DB(DB_SERVER,DB_NAME);
         	myDB.Update("UPDATE Coordinador SET Telefono=" + privilege + " WHERE ID=" + this.id + ";");
 		this.phoneNumber = phoneNumber;
