@@ -6,18 +6,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+/*
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
+*/
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+/*
 import javax.swing.LayoutStyle.ComponentPlacement;
-
+*/
 public class YourPath extends JFrame {
 
 	private JPanel contentPane;

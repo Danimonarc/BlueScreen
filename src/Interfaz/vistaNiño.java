@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -57,7 +58,7 @@ public class vistaNiño extends JFrame {
 	
 	public vistaNiño(Beneficiario ben) {
 		
-		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -260,24 +261,39 @@ public class vistaNiño extends JFrame {
 		añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
-				try {
-				new Beneficiario(1,nombre.getText(),"","Male",format.parse(fechaNac.getText()),format.parse(fechaEn.getText()),
-						null,format.parse("10-10-2018"),null,beca.getText(),proyecto.getText(),Float.parseFloat(nota.getText()),
-						lugarNac.getText(),lugarRes.getText(),"");
-				}catch(ParseException e) 
-				{
-					
-				}
+					Date birthDate = null;
+					Date entryDate = null, exitDate = null;
+					try {
+						if(!fechaNac.getText().equals("")) {
+							birthDate = format.parse(fechaNac.getText());
+						}
+						if(!fechaEn.getText().equals("")) {
+							entryDate = format.parse(fechaEn.getText());
+						}
+						if(!fechaSal.getText().equals("")) {
+							exitDate = format.parse(fechaSal.getText());
+						}
+						
+						new Beneficiario(1, nombre.getText(), "", "Male", birthDate, entryDate, exitDate,
+								format.parse("10/10/2018"), format.parse("10/10/2018"), beca.getText(), proyecto.getText(),
+								Integer.parseInt(nota.getText()), lugarNac.getText(), lugarRes.getText(), "");
+						
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 				
 				}});
+		
+		
 		guardarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				ben.setName(nombre.getText());
 				ben.setBirthDate(format.parse(fechaNac.getText()));
 				ben.setEntryDate(format.parse(fechaEn.getText()));
-				ben.setCourseGrade(Float.parseFloat(nota.getText()));
+				ben.setCourseGrade(Integer.parseInt(nota.getText()));
 				ben.setBirthPlace(lugarNac.getText());
 				ben.setLivingPlace(lugarRes.getText());
 				ben.setProject(proyecto.getText());

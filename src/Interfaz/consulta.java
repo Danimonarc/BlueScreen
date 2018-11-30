@@ -12,17 +12,20 @@ import prototype.Beneficiario;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+/*
 import java.util.Arrays;
 import java.util.Vector;
-
+*/
 import javax.swing.JTextField;
 import javax.swing.JButton;
+/*
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+*/
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -83,6 +86,13 @@ public class consulta extends JFrame {
 		panel_1.add(btnVolver);
 		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
 		
+		JButton btnAdd = new JButton("A\u00F1adir");
+		panel_1.add(btnAdd);
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new vistaNiño(null).setVisible(true);
+			}
+		});
 		
 		JTable table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -100,6 +110,7 @@ public class consulta extends JFrame {
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				//int ID = Integer.valueOf(((String)entrada.getText()));
 				int ID = Integer.parseInt(entrada.getText());
 				Beneficiario ben = new Beneficiario(ID);
 				if(!ben.equals(null)) 
@@ -114,7 +125,7 @@ public class consulta extends JFrame {
 		modificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
-				id =Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
+				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
 				new vistaNiño(new Beneficiario(id)).setVisible(true);
 				
 				
