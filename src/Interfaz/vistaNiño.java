@@ -36,6 +36,9 @@ public class vistaNiño extends JFrame {
 	private JTextField beca;
 	private JTextField nota;
 
+	private String name, lugarN, lugarR, project, bec;
+	private int mark;
+	private Date birthDate, entryDate, exitDate;
 	/**
 	 * Launch the application.
 	 */
@@ -57,8 +60,15 @@ public class vistaNiño extends JFrame {
 	 */
 	
 	public vistaNiño(Beneficiario ben) {
-		
+//				DEFINICIÓN BASE DE LAS FECHAS
+		birthDate = null;
+		entryDate = null;
+		exitDate = null;
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//
+//				GENERADO PR LAS LIBRERÍAS, TOCAR LO MENENOS POSIBLE
+//
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -235,19 +245,44 @@ public class vistaNiño extends JFrame {
 						.addComponent(nota, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(212, Short.MAX_VALUE))
 		);
+//
+//		FIN DEL GENERADO POR LAS LIBRERÍAS
+//
+
+//CONTROL DE SI ESTAMOS EN MODO EDICION O EN MODO AÑADIR
+		if(ben==null) 
+		{
+			guardarBtn.setEnabled(false);
+		}
+		else 
+		{
+			añadir.setEnabled(false);
+		}
+		
+//		INICIALIZACIÓN DE VARIABLES MODO EDITAR
 		if(!(ben==null)) 
 		{
-			nombre.setText(ben.getName());
-			fechaNac.setText(ben.getBirthDate().toString());
-			fechaEn.setText(ben.getEntryDate().toString());
-			nota.setText(ben.getCourseGrade()+"");
-			lugarNac.setText(ben.getBirthPlace());
-			lugarRes.setText(ben.getLivingPlace());
-			proyecto.setText(ben.getProject());
-			beca.setText(ben.getBeca());
-			if(!ben.getExitDate().equals(null)) 
+			name = ben.getName();
+			birthDate = ben.getBirthDate();
+			entryDate = ben.getEntryDate();
+			mark = ben.getCourseGrade();
+			lugarN = ben.getBirthPlace();
+			lugarR = ben.getLivingPlace();
+			project = ben.getProject();
+			bec=ben.getBeca();
+			exitDate = ben.getExitDate();
+			
+			nombre.setText(name);
+			fechaNac.setText(birthDate.toString());
+			fechaEn.setText(exitDate.toString());
+			nota.setText(mark+"");
+			lugarNac.setText(lugarN);
+			lugarRes.setText(lugarR);
+			proyecto.setText(project);
+			beca.setText(bec);
+			if(!exitDate.equals(null)) 
 			{
-				fechaSal.setText(ben.getExitDate().toString());
+				fechaSal.setText(exitDate.toString());
 			}
 			
 		
@@ -255,32 +290,33 @@ public class vistaNiño extends JFrame {
 			
 		}
 		
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();}});
+//			AÑADIDO A LA BASE DE DATOS EN MODO AÑADIR
 		añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-					Date birthDate = null;
-					Date entryDate = null, exitDate = null;
-					int courseGrade = -1;
+					
 					try {
+						
 						if(!fechaNac.getText().equals("")) {
 							birthDate = format.parse(fechaNac.getText());
 						}
 						if(!fechaEn.getText().equals("")) {
-							entryDate = format.parse(fechaEn.getText());
-						}
+							entryDate = format.parse(fechaEn.getText());  //Controlamos si las fechas son nulas 
+						} 												  //para controlar excepciones
 						if(!fechaSal.getText().equals("")) {
 							exitDate = format.parse(fechaSal.getText());
 						}
-						if(!nota.getText().equals("")) {
-							courseGrade = Integer.parseInt(nota.getText());
-						}
 						
-						new Beneficiario(1, nombre.getText(), "", "Male", birthDate, entryDate, exitDate,
-								format.parse("10/10/2018"), format.parse("10/10/2018"), beca.getText(), proyecto.getText(),
-								courseGrade, lugarNac.getText(), lugarRes.getText(), "");
+						name = nombre.getText();
+						bec = beca.getText();
+						project = proyecto.getText();
+						mark = Integer.parseInt(nota.getText());
+						lugarN = lugarNac.getText();
+						lugarR = lugarRes.getText();
+						
+						new Beneficiario(1, name, "", "Female", birthDate, entryDate, exitDate,
+								format.parse("10/10/2018"), format.parse("10/10/2018"), bec, project,
+								mark, lugarN, lugarR, "");
 						
 					} catch (NumberFormatException e) {
 						e.printStackTrace();
@@ -289,11 +325,13 @@ public class vistaNiño extends JFrame {
 					}
 				
 				}});
-		
-		
+//		
+//			Botón guardar para editar los valores de la base de datos
+//
 		guardarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					
 				ben.setName(nombre.getText());
 				ben.setBirthDate(format.parse(fechaNac.getText()));
 				ben.setEntryDate(format.parse(fechaEn.getText()));
@@ -302,6 +340,8 @@ public class vistaNiño extends JFrame {
 				ben.setLivingPlace(lugarRes.getText());
 				ben.setProject(proyecto.getText());
 				ben.setBeca(beca.getText());
+				
+				
 				if(!(fechaSal.getText().equals("") && ben.getExitDate().toString().equals(""))) 
 				{
 					ben.setExitDate(format.parse(fechaSal.getText()));
@@ -311,14 +351,11 @@ public class vistaNiño extends JFrame {
 					
 				}
 				;}});
-		if(ben==null) 
-		{
-			guardarBtn.setEnabled(false);
-		}
-		else 
-		{
-			añadir.setEnabled(false);
-		}
+		
+//			BOTON DE VOLVER
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();}});
 		panel_1.setLayout(gl_panel_1);
 	}
 }

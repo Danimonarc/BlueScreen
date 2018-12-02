@@ -98,9 +98,7 @@ public class consulta extends JFrame {
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
-			new String[] {
-				"Nombre", "Edad", "ID"
-			}
+			colums
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -110,7 +108,6 @@ public class consulta extends JFrame {
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//int ID = Integer.valueOf(((String)entrada.getText()));
 				int ID = Integer.parseInt(entrada.getText());
 				Beneficiario ben = new Beneficiario(ID);
 				if(!ben.equals(null)) 
