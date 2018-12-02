@@ -1,6 +1,7 @@
 package Interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 public class vistaNiño extends JFrame {
 
@@ -36,9 +38,10 @@ public class vistaNiño extends JFrame {
 	private JTextField beca;
 	private JTextField nota;
 
-	private String name, lugarN, lugarR, project, bec;
+	private String name, lugarN, lugarR, project, bec, comentario;
 	private int mark;
 	private Date birthDate, entryDate, exitDate;
+	private boolean nombreO, fechaEnO, proyectoO;
 	/**
 	 * Launch the application.
 	 */
@@ -70,7 +73,7 @@ public class vistaNiño extends JFrame {
 //
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 500, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -92,7 +95,7 @@ public class vistaNiño extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		
-		JLabel lblNombre = new JLabel("Nombre");
+		JLabel lblNombre = new JLabel("Nombre*");
 		
 		nombre = new JTextField();
 		nombre.setColumns(10);
@@ -104,7 +107,7 @@ public class vistaNiño extends JFrame {
 		
 		JLabel lblNacimiento = new JLabel("Nacimiento");
 		
-		JLabel lblNewLabel = new JLabel("Proyecto");
+		JLabel lblNewLabel = new JLabel("Proyecto*");
 		
 		proyecto = new JTextField();
 		proyecto.setColumns(10);
@@ -126,7 +129,7 @@ public class vistaNiño extends JFrame {
 		fechaEn = new JTextField();
 		fechaEn.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Entrada");
+		JLabel lblNewLabel_3 = new JLabel("Entrada*");
 		
 		JLabel lblNewLabel_4 = new JLabel("Fecha de");
 		
@@ -144,52 +147,68 @@ public class vistaNiño extends JFrame {
 		
 		nota = new JTextField();
 		nota.setColumns(10);
+		
+		JTextArea observaciones = new JTextArea();
+		
+		JLabel lblNewLabel_6 = new JLabel("Observacones");
+		
+		JLabel labelO = new JLabel("*  Campos obligatorios");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(35)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNacimiento)
-						.addComponent(lblNombre)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblLugarDe)
-							.addComponent(lblNewLabel_3)
-							.addComponent(lblNewLabel_2)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblBeca)
-								.addComponent(lblNacimiento_1)))
-						.addComponent(lblFecha))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(nombre, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(lugarNac, Alignment.LEADING)
-										.addComponent(fechaNac, Alignment.LEADING))
-									.addGap(35)
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblNewLabel_1, Alignment.TRAILING)
-										.addComponent(lblNewLabel, Alignment.TRAILING)))
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(beca, Alignment.LEADING)
-										.addComponent(fechaEn, Alignment.LEADING))
-									.addPreferredGap(ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblNewLabel_4)
-										.addComponent(lblNewLabel_5)
-										.addComponent(lblNota))))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(nota, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addGap(35)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNacimiento)
+								.addComponent(lblNombre)
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-									.addComponent(fechaSal, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-									.addComponent(lugarRes, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-									.addComponent(proyecto)))))
-					.addContainerGap(75, Short.MAX_VALUE))
+									.addComponent(lblLugarDe)
+									.addComponent(lblNewLabel_3)
+									.addComponent(lblNewLabel_2)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblBeca)
+										.addComponent(lblNacimiento_1)))
+								.addComponent(lblFecha))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(nombre, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(lugarNac, Alignment.LEADING)
+												.addComponent(fechaNac, Alignment.LEADING))
+											.addGap(35)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblNewLabel_1, Alignment.TRAILING)
+												.addComponent(lblNewLabel, Alignment.TRAILING)))
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(beca, Alignment.LEADING)
+												.addComponent(fechaEn, Alignment.LEADING))
+											.addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblNewLabel_4)
+												.addComponent(lblNewLabel_5)
+												.addComponent(lblNota))))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addComponent(nota, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+											.addComponent(fechaSal, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+											.addComponent(lugarRes, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+											.addComponent(proyecto))))))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(134)
+							.addComponent(lblNewLabel_6)
+							.addGap(18)
+							.addComponent(observaciones, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(184)
+							.addComponent(labelO)))
+					.addContainerGap(36, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -243,7 +262,13 @@ public class vistaNiño extends JFrame {
 						.addComponent(beca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNota)
 						.addComponent(nota, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(212, Short.MAX_VALUE))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(observaciones, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_6))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(labelO)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 //
 //		FIN DEL GENERADO POR LAS LIBRERÍAS
@@ -271,6 +296,8 @@ public class vistaNiño extends JFrame {
 			project = ben.getProject();
 			bec=ben.getBeca();
 			exitDate = ben.getExitDate();
+			comentario = ben.getComments();
+			
 			
 			nombre.setText(name);
 			fechaNac.setText(birthDate.toString());
@@ -280,7 +307,9 @@ public class vistaNiño extends JFrame {
 			lugarRes.setText(lugarR);
 			proyecto.setText(project);
 			beca.setText(bec);
-			if(exitDate != null) 
+			observaciones.setText(comentario);
+		
+			if(exitDate!=null) 
 			{
 				fechaSal.setText(exitDate.toString());
 			}
@@ -291,10 +320,17 @@ public class vistaNiño extends JFrame {
 		}
 		
 //			AÑADIDO A LA BASE DE DATOS EN MODO AÑADIR
+		
 		añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-					
+				nombreO = nombre.getText().equals("");
+				fechaEnO= fechaEn.getText().equals("");
+				proyectoO = proyecto.getText().equals("");
+				if((nombreO||proyectoO||fechaEnO)) 
+				{
+					labelO.setForeground(Color.RED);
+				}
+				else {	
 					try {
 						
 						if(!fechaNac.getText().equals("")) {
@@ -313,15 +349,17 @@ public class vistaNiño extends JFrame {
 						mark = Integer.parseInt(nota.getText());
 						lugarN = lugarNac.getText();
 						lugarR = lugarRes.getText();
+						comentario = observaciones.getText();
 						
 						new Beneficiario(1, name, "", "Female", birthDate, entryDate, exitDate,
 								format.parse("10/10/2018"), format.parse("10/10/2018"), bec, project,
-								mark, lugarN, lugarR, "");
+								mark, lugarN, lugarR, comentario);
 						
 					} catch (NumberFormatException e) {
-						e.printStackTrace();
+						new Dialogo(e.getMessage(),true, true);
 					} catch (ParseException e) {
-						e.printStackTrace();
+						new Dialogo(e.getMessage(),true, true);
+					}
 					}
 				
 				}});
@@ -330,8 +368,16 @@ public class vistaNiño extends JFrame {
 //
 		guardarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				nombreO = nombre.getText().equals("");
+				fechaEnO= fechaEn.getText().equals("");
+				proyectoO = proyecto.getText().equals("");
+				if((nombreO||proyectoO||fechaEnO)) 
+				{
+					labelO.setForeground(Color.RED);
+				}
+				else {
 				try {
-					
+				
 				ben.setName(nombre.getText());
 				ben.setBirthDate(format.parse(fechaNac.getText()));
 				ben.setEntryDate(format.parse(fechaEn.getText()));
@@ -349,7 +395,7 @@ public class vistaNiño extends JFrame {
 				}catch(ParseException e)
 				{
 					e.printStackTrace();
-				}
+				}}
 				;}});
 		
 //			BOTON DE VOLVER
