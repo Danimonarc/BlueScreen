@@ -263,6 +263,7 @@ public class vistaNiño extends JFrame {
 				
 					Date birthDate = null;
 					Date entryDate = null, exitDate = null;
+					int courseGrade = -1;
 					try {
 						if(!fechaNac.getText().equals("")) {
 							birthDate = format.parse(fechaNac.getText());
@@ -273,10 +274,13 @@ public class vistaNiño extends JFrame {
 						if(!fechaSal.getText().equals("")) {
 							exitDate = format.parse(fechaSal.getText());
 						}
+						if(!nota.getText().equals("")) {
+							courseGrade = Integer.parseInt(nota.getText());
+						}
 						
 						new Beneficiario(1, nombre.getText(), "", "Male", birthDate, entryDate, exitDate,
 								format.parse("10/10/2018"), format.parse("10/10/2018"), beca.getText(), proyecto.getText(),
-								Integer.parseInt(nota.getText()), lugarNac.getText(), lugarRes.getText(), "");
+								courseGrade, lugarNac.getText(), lugarRes.getText(), "");
 						
 					} catch (NumberFormatException e) {
 						e.printStackTrace();
