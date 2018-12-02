@@ -64,7 +64,7 @@ public class vistaNiño extends JFrame {
 		birthDate = null;
 		entryDate = null;
 		exitDate = null;
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 //
 //				GENERADO PR LAS LIBRERÍAS, TOCAR LO MENENOS POSIBLE
 //
@@ -274,13 +274,13 @@ public class vistaNiño extends JFrame {
 			
 			nombre.setText(name);
 			fechaNac.setText(birthDate.toString());
-			fechaEn.setText(exitDate.toString());
+			fechaEn.setText(entryDate.toString());
 			nota.setText(mark+"");
 			lugarNac.setText(lugarN);
 			lugarRes.setText(lugarR);
 			proyecto.setText(project);
 			beca.setText(bec);
-			if(!exitDate.equals(null)) 
+			if(exitDate != null) 
 			{
 				fechaSal.setText(exitDate.toString());
 			}
@@ -348,7 +348,7 @@ public class vistaNiño extends JFrame {
 				}
 				}catch(ParseException e)
 				{
-					
+					e.printStackTrace();
 				}
 				;}});
 		
