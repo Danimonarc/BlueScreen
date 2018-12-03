@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Font;
 
 
@@ -69,6 +71,9 @@ public class Dialogo extends JDialog {
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 				}
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();}});
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
@@ -79,5 +84,6 @@ public class Dialogo extends JDialog {
 				}
 			}
 		}
+		
 	}
 }

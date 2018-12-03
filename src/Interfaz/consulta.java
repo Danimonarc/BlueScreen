@@ -55,6 +55,7 @@ public class consulta extends JFrame {
 	 * Create the frame.
 	 */
 	public consulta() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -90,7 +91,7 @@ public class consulta extends JFrame {
 		panel_1.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new vistaNiño(null).setVisible(true);
+				new VistaNino(null).setVisible(true);
 			}
 		});
 		
@@ -98,9 +99,7 @@ public class consulta extends JFrame {
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
-			new String[] {
-				"Nombre", "Edad", "ID"
-			}
+			colums
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -110,7 +109,6 @@ public class consulta extends JFrame {
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//int ID = Integer.valueOf(((String)entrada.getText()));
 				int ID = Integer.parseInt(entrada.getText());
 				Beneficiario ben = new Beneficiario(ID);
 				if(!ben.equals(null)) 
@@ -126,12 +124,19 @@ public class consulta extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new vistaNiño(new Beneficiario(id)).setVisible(true);
+				new VistaNino(new Beneficiario(id)).setVisible(true);
+				
 				
 				
 				
 			}});
-		
+
+		eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int id;
+				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
+				new Beneficiario(id).DeleteBeneficiary();
+				}});
 		
 		
 		contentPane.add(table, BorderLayout.CENTER);

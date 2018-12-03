@@ -110,7 +110,7 @@ public class login extends JFrame {
 		panelSur.add(forgot);
 		forgot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new contraseñaOlvidada().setVisible(true);
+				new ContrasenaOlvidada().setVisible(true);
 			}});
 	}
 }
