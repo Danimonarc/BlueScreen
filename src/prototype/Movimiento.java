@@ -13,7 +13,7 @@ public class Movimiento {
     private int project_id;
     private Date transactionDate;
     private double quantity;
-    private String description
+    private String description;
 
     public static List<Movimiento> TransactionList()
     { 
@@ -59,7 +59,7 @@ public class Movimiento {
         this.project_id = project_id;
         this.transactionDate = transactionDate;
         this.quantity = quantity;
-        this.description;
+        this.description = description;
     }
 
     public void DeleteTransaction()
@@ -69,7 +69,7 @@ public class Movimiento {
         myDB.Delete("DELETE FROM Movimiento WHERE id ="+ this.id + ";");    	
             
         this.id = -1;
-        this.project_id = null;
+        this.project_id = -1;
         this.transactionDate = null;
         this.quantity = -1;
         this.description = null;
@@ -119,7 +119,7 @@ public class Movimiento {
         return quantity;
     }
 
-    public int getDescription() {
+    public String getDescription() {
         return description;
     }
 }

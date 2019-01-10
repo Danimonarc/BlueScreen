@@ -11,7 +11,7 @@ public class Egreso {
 
 	private int movement_id;
     private int beneficiary_id;
-    private String beneficiaryName
+    private String beneficiaryName;
 
     public static List<Egreso> EgressList()
     { 
@@ -57,7 +57,7 @@ public class Egreso {
             
         this.movement_id = -1;
         this.beneficiary_id = -1;
-        this.beneficiaryName = null
+        this.beneficiaryName = null;
     }
 
     public String formatDate(Date date)

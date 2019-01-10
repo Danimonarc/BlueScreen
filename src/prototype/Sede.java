@@ -70,7 +70,7 @@ public class Sede {
         
     public String toString()
     {       
-        return "\n\t//Id: " + id + "\n\t//Provincia: " + province;
+        return "\n\t//Id: " + project_id + "\n\t//Provincia: " + province;
     }
 
     /*---------------------------------------------------------------*/
@@ -87,7 +87,7 @@ public class Sede {
         return project_id;
     }
         
-    public int getProvince() {
+    public String getProvince() {
         return province;
     }
 }
