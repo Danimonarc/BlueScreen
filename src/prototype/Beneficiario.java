@@ -151,7 +151,7 @@ public class Beneficiario {
     {
         DB myDB = new DB(DB_SERVER,DB_NAME);
         myDB.Update("UPDATE Beneficiario SET beca= " + scolarship + " WHERE persona_id = " + this.person_id + ";");
-        this.coordinator_id = coordinator_id;
+        this.scolarship = scolarship;
     }
 
     public void setMark(int mark) 

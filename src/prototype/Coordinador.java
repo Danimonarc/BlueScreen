@@ -14,7 +14,7 @@ public class Coordinador {
     private int privilege;
     private String job;
     private String phoneNumber;
-    private String address
+    private String address;
         
     public static List<Coordinador> AgentList()
     { 
@@ -126,13 +126,13 @@ public class Coordinador {
     public void setProjectId(int project_id) 
     {
     	DB myDB = new DB(DB_SERVER,DB_NAME);
-       	myDB.Update("UPDATE Coordinador SET proyecto_id= " + proejct_id + " WHERE persona_id=" + this.person_id + ";");
+       	myDB.Update("UPDATE Coordinador SET proyecto_id= " + project_id + " WHERE persona_id=" + this.person_id + ";");
     	this.project_id = project_id;
     }
 
     public void setPrivilege(int privilege) 
     {
-    	DB myDB = new DB(DB_SERVER,DB_NAME);  º0
+    	DB myDB = new DB(DB_SERVER,DB_NAME);
        	myDB.Update("UPDATE Coordinador SET nivelPermisos= '" + privilege + "' WHERE persona_id=" + this.person_id + ";");
     	this.privilege = privilege;
     }

@@ -91,11 +91,11 @@ public class Apadrinamiento {
    		return beneficiary_id;
     }
     	
-    public Date getPartnerId() {
+    public int getPartnerId() {
     	return partner_id;
     }
 
-    public String getHeadquarterId() {
+    public int getHeadquarterId() {
     	return headquarter_id;
     }
 }

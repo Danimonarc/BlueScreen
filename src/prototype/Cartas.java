@@ -98,7 +98,7 @@ public class Cartas {
     	return sentDate;
     }
 
-    public String getBeneficiaryId() {
+    public int getBeneficiaryId() {
     	return beneficiary_id;
     }
 }

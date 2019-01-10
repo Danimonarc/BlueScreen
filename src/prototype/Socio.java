@@ -38,7 +38,7 @@ public class Socio {
     {
     	// Crea el objeto cargando sus valores de la base de datos
         DB myDB = new DB(DB_SERVER,DB_NAME);
-        Object[] tupla = myDB.Select("SELECT * FROM Socio WHERE persona_id = " + persona_id + ";").get(0);
+        Object[] tupla = myDB.Select("SELECT * FROM Socio WHERE persona_id = " + person_id + ";").get(0);
         
         this.person_id = (int)tupla[0];
         this.dni = (String)tupla[1];
@@ -105,7 +105,7 @@ public class Socio {
         
     public String toString()
     {      	
-        return persona_id + "->\t" + "\n\t//DNI: " + dni + "\n\t//e-mail: " + email + "\n\t//Codigo postal: " + postalCode 
+        return person_id + "->\t" + "\n\t//DNI: " + dni + "\n\t//e-mail: " + email + "\n\t//Codigo postal: " + postalCode 
                 + "\n\t//Poblacion: " + population + "\n\t//Provincia: " + province + "\n\t//Direccion: " + address 
                 + "\n\t//Telefono: " + phoneNumber + "\n\t//Movil: " + secondPhoneNumber + "\n\t//Certificado: " + certified;
     }
@@ -170,7 +170,7 @@ public class Socio {
     	this.secondPhoneNumber = secondPhoneNumber;
     }
 
-    public void setSecondPhoneNumber(Boolean secondPhoneNumber) 
+    public void setCertified(Boolean certified) 
     {
         DB myDB = new DB(DB_SERVER,DB_NAME);
         myDB.Update("UPDATE Socio SET certificado=" + certified + " WHERE persona_id=" + this.person_id + ";");

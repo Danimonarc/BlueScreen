@@ -88,7 +88,7 @@ public class Persona {
         this.name = null;
         this.surname = null;
         this.sex = null;
-        this.image = null;
+        this.image = -1;
         this.birthDate = null;
         this.entryDate = null;
         this.exitDate = null;
