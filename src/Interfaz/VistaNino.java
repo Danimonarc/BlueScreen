@@ -1,5 +1,5 @@
 package Interfaz;
-
+import prototype.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -13,9 +13,6 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import prototype.Beneficiario;
-
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -24,17 +21,15 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import com.toedter.calendar.JDateChooser;
 
 public class VistaNino extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nombre;
-	private JTextField fechaNac;
 	private JTextField proyecto;
 	private JTextField lugarNac;
 	private JTextField lugarRes;
-	private JTextField fechaEn;
-	private JTextField fechaSal;
 	private JTextField beca;
 	private JTextField nota;
 
@@ -42,6 +37,7 @@ public class VistaNino extends JFrame {
 	private int mark;
 	private Date birthDate, entryDate, exitDate;
 	private boolean nombreO, fechaEnO, proyectoO;
+	private Persona be;
 	/**
 	 * Launch the application.
 	 */
@@ -63,6 +59,7 @@ public class VistaNino extends JFrame {
 	 */
 	
 	public VistaNino(Beneficiario ben) {
+		be = new Persona(ben.getPersonId());
 //				DEFINICIÓN BASE DE LAS FECHAS
 		birthDate = null;
 		entryDate = null;
@@ -102,9 +99,6 @@ public class VistaNino extends JFrame {
 		
 		JLabel lblFecha = new JLabel("Fecha de \r\n");
 		
-		fechaNac = new JTextField();
-		fechaNac.setColumns(10);
-		
 		JLabel lblNacimiento = new JLabel("Nacimiento");
 		
 		JLabel lblNewLabel = new JLabel("Proyecto*");
@@ -126,15 +120,9 @@ public class VistaNino extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("Fecha de");
 		
-		fechaEn = new JTextField();
-		fechaEn.setColumns(10);
-		
 		JLabel lblNewLabel_3 = new JLabel("Entrada*");
 		
 		JLabel lblNewLabel_4 = new JLabel("Fecha de");
-		
-		fechaSal = new JTextField();
-		fechaSal.setColumns(10);
 		
 		JLabel lblNewLabel_5 = new JLabel("Salida");
 		
@@ -153,6 +141,12 @@ public class VistaNino extends JFrame {
 		JLabel lblNewLabel_6 = new JLabel("Observacones");
 		
 		JLabel labelO = new JLabel("*  Campos obligatorios");
+		
+		JDateChooser fechaEn = new JDateChooser();
+		
+		JDateChooser fechaSal = new JDateChooser();
+		
+		JDateChooser fechaNac = new JDateChooser();
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -177,29 +171,30 @@ public class VistaNino extends JFrame {
 								.addGroup(gl_panel_1.createSequentialGroup()
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_panel_1.createSequentialGroup()
-											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(lugarNac, Alignment.LEADING)
-												.addComponent(fechaNac, Alignment.LEADING))
-											.addGap(35)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addComponent(lugarNac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(fechaNac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+											.addGap(26)
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addComponent(lblNewLabel_1, Alignment.TRAILING)
 												.addComponent(lblNewLabel, Alignment.TRAILING)))
 										.addGroup(gl_panel_1.createSequentialGroup()
-											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(beca, Alignment.LEADING)
-												.addComponent(fechaEn, Alignment.LEADING))
-											.addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addComponent(beca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(fechaEn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 												.addComponent(lblNewLabel_4)
 												.addComponent(lblNewLabel_5)
 												.addComponent(lblNota))))
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-										.addComponent(nota, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+										.addComponent(fechaSal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-											.addComponent(fechaSal, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-											.addComponent(lugarRes, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-											.addComponent(proyecto))))))
+											.addComponent(nota, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addComponent(lugarRes, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+												.addComponent(proyecto)))))))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(134)
 							.addComponent(lblNewLabel_6)
@@ -219,16 +214,18 @@ public class VistaNino extends JFrame {
 						.addComponent(nombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(37)
-							.addComponent(lblFecha)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNacimiento))
-						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(48)
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(fechaNac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel)
-								.addComponent(proyecto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(proyecto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(37)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(fechaNac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(lblFecha)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblNacimiento)))))
 					.addGap(31)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
@@ -239,23 +236,18 @@ public class VistaNino extends JFrame {
 							.addComponent(lblLugarDe)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblNacimiento_1)))
+					.addGap(23)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(35)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(fechaEn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(fechaSal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblNewLabel_4)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_5))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(23)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(lblNewLabel_4)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblNewLabel_5))
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(lblNewLabel_2)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblNewLabel_3)))))
+							.addComponent(lblNewLabel_2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_3))
+						.addComponent(fechaEn, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(fechaSal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(28)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblBeca)
@@ -268,7 +260,7 @@ public class VistaNino extends JFrame {
 						.addComponent(lblNewLabel_6))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(labelO)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(55, Short.MAX_VALUE))
 		);
 //
 //		FIN DEL GENERADO POR LAS LIBRERÍAS
@@ -287,21 +279,21 @@ public class VistaNino extends JFrame {
 //		INICIALIZACIÓN DE VARIABLES MODO EDITAR
 		if(!(ben==null)) 
 		{
-			name = ben.getName();
-			birthDate = ben.getBirthDate();
-			entryDate = ben.getEntryDate();
-			mark = ben.getCourseGrade();
-			lugarN = ben.getBirthPlace();
-			lugarR = ben.getLivingPlace();
-			project = ben.getProject();
-			bec=ben.getBeca();
-			exitDate = ben.getExitDate();
-			comentario = ben.getComments();
+			name = be.getName();
+			birthDate = be.getBirthDate();
+			entryDate = be.getEntryDate();
+			mark = ben.getMark();
+			lugarN = ben.getBirthCommunity();
+			lugarR = ben.getLivingCommunity();
+			project = new Proyecto(ben.getProjectId()).getName();
+			bec=ben.getScolarship();
+			exitDate = ben.getProjectExitDate();
+			comentario = be.getComments();
 			
 			
 			nombre.setText(name);
-			fechaNac.setText(birthDate.toString());
-			fechaEn.setText(entryDate.toString());
+			fechaNac.setDate(birthDate);
+			fechaEn.setDate(entryDate);
 			nota.setText(mark+"");
 			lugarNac.setText(lugarN);
 			lugarRes.setText(lugarR);
@@ -311,7 +303,7 @@ public class VistaNino extends JFrame {
 		
 			if(exitDate!=null) 
 			{
-				fechaSal.setText(exitDate.toString());
+				fechaSal.setDate(exitDate);
 			}
 			
 		
@@ -324,7 +316,7 @@ public class VistaNino extends JFrame {
 		añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nombreO = nombre.getText().equals("");
-				fechaEnO= fechaEn.getText().equals("");
+				fechaEnO= fechaEn.getDate() == null;
 				proyectoO = proyecto.getText().equals("");
 				if((nombreO||proyectoO||fechaEnO)) 
 				{
@@ -333,14 +325,14 @@ public class VistaNino extends JFrame {
 				else {	
 					try {
 						
-						if(!fechaNac.getText().equals("")) {
-							birthDate = format.parse(fechaNac.getText());
+						if(! (fechaNac.getDate()== null)) {
+							birthDate = fechaNac.getDate();
 						}
-						if(!fechaEn.getText().equals("")) {
-							entryDate = format.parse(fechaEn.getText());  //Controlamos si las fechas son nulas 
+						if(!(fechaEn.getDate()==null)) {
+							entryDate = fechaEn.getDate();  //Controlamos si las fechas son nulas 
 						} 												  //para controlar excepciones
-						if(!fechaSal.getText().equals("")) {
-							exitDate = format.parse(fechaSal.getText());
+						if(!(fechaSal.getDate()==null)) {
+							exitDate = fechaSal.getDate();
 						}
 						
 						name = nombre.getText();
@@ -351,15 +343,13 @@ public class VistaNino extends JFrame {
 						lugarR = lugarRes.getText();
 						comentario = observaciones.getText();
 						
-						new Beneficiario(1, name, "", "Female", birthDate, entryDate, exitDate,
-								format.parse("10/10/2018"), format.parse("10/10/2018"), bec, project,
-								mark, lugarN, lugarR, comentario);
+						Persona auxi =new Persona(name,"","Male",1,birthDate,entryDate,exitDate,comentario);
+						new Beneficiario(auxi.getId(), 1, 1, entryDate, exitDate, bec, mark, lugarN, lugarR);
+								;
 						
 					} catch (NumberFormatException e) {
 						new Dialogo(e.getMessage(),true, true);
-					} catch (ParseException e) {
-						new Dialogo(e.getMessage(),true, true);
-					}
+					} 
 					}
 				
 				}});
@@ -369,34 +359,30 @@ public class VistaNino extends JFrame {
 		guardarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nombreO = nombre.getText().equals("");
-				fechaEnO= fechaEn.getText().equals("");
+				fechaEnO= (fechaEn.getDate()==null);
 				proyectoO = proyecto.getText().equals("");
 				if((nombreO||proyectoO||fechaEnO)) 
 				{
 					labelO.setForeground(Color.RED);
 				}
 				else {
-				try {
-				
-				ben.setName(nombre.getText());
-				ben.setBirthDate(format.parse(fechaNac.getText()));
-				ben.setEntryDate(format.parse(fechaEn.getText()));
-				ben.setCourseGrade(Integer.parseInt(nota.getText()));
-				ben.setBirthPlace(lugarNac.getText());
-				ben.setLivingPlace(lugarRes.getText());
-				ben.setProject(proyecto.getText());
-				ben.setBeca(beca.getText());
 				
 				
-				if(!(fechaSal.getText().equals("") && ben.getExitDate().toString().equals(""))) 
+				be.setName(nombre.getText());
+				be.setBirthDate(fechaNac.getDate());
+				ben.setProjectEntryDate(fechaEn.getDate());
+				ben.setMark(Integer.parseInt(nota.getText()));
+				ben.setBirthCommunity(lugarNac.getText());
+				ben.setLivingCommunity(lugarRes.getText());
+				//ben.setPro(new Proyecto(proyecto.getText()));
+				ben.setScolarship(beca.getText());
+				
+				if(!(fechaSal.getDate()==null) && ben.getProjectExitDate().toString().equals("")) 
 				{
-					ben.setExitDate(format.parse(fechaSal.getText()));
+					ben.setProjectExitDate(fechaSal.getDate());
+				
 				}
-				}catch(ParseException e)
-				{
-					e.printStackTrace();
-				}}
-				;}});
+				;}}});
 		
 //			BOTON DE VOLVER
 		btnVolver.addActionListener(new ActionListener() {

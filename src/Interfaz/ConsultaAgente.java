@@ -1,46 +1,34 @@
 package Interfaz;
-import prototype.*;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import prototype.Beneficiario;
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*
-import java.util.Arrays;
-import java.util.Vector;
-*/
-import javax.swing.JTextField;
-import javax.swing.JButton;
-/*
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JToggleButton;
-import javax.swing.JScrollBar;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-*/
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
-public class consulta extends JFrame {
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+import prototype.Beneficiario;
+import prototype.Coordinador;
+import prototype.Persona;
+
+public class ConsultaAgente extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField entrada;
 	private JTable table;
 	private Object[] bena;
-	Persona aux;
 
 	/**
 	 * Launch the application.
@@ -49,7 +37,7 @@ public class consulta extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					consulta frame = new consulta();
+					ConsultaAgente frame = new ConsultaAgente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,8 +49,7 @@ public class consulta extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public consulta() {
-		
+	public ConsultaAgente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -82,7 +69,7 @@ public class consulta extends JFrame {
 		panel.add(botonAceptar);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "ID", "Lugar de nacimiento", "Lugar de residencia"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Numero de telefono"}));
 		panel.add(comboBox);
 		
 		JPanel panel_1 = new JPanel();
@@ -113,15 +100,14 @@ public class consulta extends JFrame {
 			},
 			colums
 		));
-		
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		//cambiar aqui a proyecto
 		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		for (Beneficiario b :Beneficiario.BeneficiaryList()) 
+		for (Coordinador b :Coordinador.AgentList()) 
 		{
-			aux = new Persona(b.getPersonId());
-			Object[] bena = {aux.getName(),aux.getBirthDate(), aux.getId()};
+			Object[] bena = {new Persona(b.getPersonId()).getName(),b.getPhoneNumber()};
 			modelo.addRow(bena);
 		}
 		
@@ -130,12 +116,11 @@ public class consulta extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				int ID = Integer.parseInt(entrada.getText());
-				Beneficiario ben = new Beneficiario(ID);
+				Coordinador ben = new Coordinador(ID);
 				modelo.setRowCount(0);
 				if(!ben.equals(null)) 
 				{
-					aux = new Persona(ben.getPersonId());
-					Object[] bena = {aux.getName(),aux.getBirthDate(), ben.getPersonId()};
+					Object[] bena = {new Persona(ben.getPersonId()).getName(),ben.getPhoneNumber()};
 					
 					modelo.addRow(bena);
 				}

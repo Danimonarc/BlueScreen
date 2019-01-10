@@ -1,47 +1,33 @@
 package Interfaz;
-import prototype.*;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import prototype.Beneficiario;
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/*
-import java.util.Arrays;
-import java.util.Vector;
-*/
-import javax.swing.JTextField;
-import javax.swing.JButton;
-/*
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.JToggleButton;
-import javax.swing.JScrollBar;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-*/
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 
-public class consulta extends JFrame {
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+import prototype.Beneficiario;
+import prototype.Proyecto;
+
+public class ConsultaProyectos extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField entrada;
 	private JTable table;
 	private Object[] bena;
-	Persona aux;
-
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +35,7 @@ public class consulta extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					consulta frame = new consulta();
+					ConsultaProyectos frame = new ConsultaProyectos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,8 +47,7 @@ public class consulta extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public consulta() {
-		
+	public ConsultaProyectos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -96,13 +81,13 @@ public class consulta extends JFrame {
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
+		String[] colums = {"Nombre", "Lugar"};
 		
 		JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new VistaNino(null).setVisible(true);
+				//new VistaProyecto(null).setVisible(true);
 			}
 		});
 		
@@ -113,15 +98,14 @@ public class consulta extends JFrame {
 			},
 			colums
 		));
-		
+		//cambiar aqui a proyecto
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		for (Beneficiario b :Beneficiario.BeneficiaryList()) 
+		for (Proyecto b :Proyecto.ProjectList()) 
 		{
-			aux = new Persona(b.getPersonId());
-			Object[] bena = {aux.getName(),aux.getBirthDate(), aux.getId()};
+			Object[] bena = {b.getName(),b.getLocation()};
 			modelo.addRow(bena);
 		}
 		
@@ -130,12 +114,11 @@ public class consulta extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				int ID = Integer.parseInt(entrada.getText());
-				Beneficiario ben = new Beneficiario(ID);
+				Proyecto ben = new Proyecto(ID);
 				modelo.setRowCount(0);
 				if(!ben.equals(null)) 
 				{
-					aux = new Persona(ben.getPersonId());
-					Object[] bena = {aux.getName(),aux.getBirthDate(), ben.getPersonId()};
+					Object[] bena = {ben.getName(),ben.getLocation()};
 					
 					modelo.addRow(bena);
 				}
@@ -168,6 +151,7 @@ public class consulta extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();}});
+	
 	}
 
 }

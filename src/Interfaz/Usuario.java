@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import prototype.Socio;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
@@ -82,10 +85,21 @@ public class Usuario extends JFrame {
 		
 		textWeb = new JTextField();
 		textWeb.setColumns(10);
+		Socio soc = new Socio(1);
 		
 		JButton cartasBtn = new JButton("Cartas");
+		cartasBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CartasNiños(soc).setVisible(true);
+			}
+		});
 		
 		JButton Niños = new JButton("Ni\u00F1os");
+		Niños.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new NinosUser(soc).setVisible(true);
+			}
+		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)

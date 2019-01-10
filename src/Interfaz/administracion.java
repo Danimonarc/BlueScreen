@@ -65,8 +65,18 @@ public class administracion extends JFrame {
 				new consulta().setVisible(true);;}});
 		
 		JButton agenteBtn = new JButton("Agente");
+		agenteBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ConsultaAgente().setVisible(true);
+			}
+		});
 		
-		JButton edificioBtn = new JButton("Edificio");
+		JButton edificioBtn = new JButton("Proyectos");
+		edificioBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ConsultaProyectos().setVisible(true);
+			}
+		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
