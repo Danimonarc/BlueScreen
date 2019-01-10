@@ -6,235 +6,155 @@ import java.util.Date;
 import java.util.List;
 
 public class Coordinador {
-	private static String DB_SERVER = "localhost";
+    private static String DB_SERVER = "localhost";
     private static String DB_NAME = "BlueCoes";
-    
-    private int id;
-    private String name;
-    private String surname;
-    //private image;
-    private String sex;
-    private Date birthDate;
-    private Date entryDate;
-    private Date exitDate;
+       
+    private int person_id;
+    private int project_id;
     private int privilege;
-    private String address;
-    private String phoneNumber;
     private String job;
-    private String comments;
-    
+    private String phoneNumber;
+    private String address
+        
     public static List<Coordinador> AgentList()
-	{ 
-		// Retorna una lista con todos los obejtos de la clase almacenados en la base de datos		
-		List<Coordinador> myList = new ArrayList<Coordinador>();
-		DB myDB  = new DB(DB_SERVER,DB_NAME);
-		
-		for(Object[] tupla: myDB.Select("SELECT * FROM Coordinador;"))
-		{
-			Coordinador c = new Coordinador( (int)tupla[0] );
-			myList.add(c);
-		}
-		return myList;
-	}
+    { 
+    	// Retorna una lista con todos los obejtos de la clase almacenados en la base de datos		
+    	List<Coordinador> myList = new ArrayList<Coordinador>();
+    	DB myDB  = new DB(DB_SERVER,DB_NAME);
+    	
+    	for(Object[] tupla: myDB.Select("SELECT * FROM Coordinador;"))
+    	{
+    		Coordinador c = new Coordinador( (int)tupla[0] );
+    		myList.add(c);
+    	}
+    	return myList;
+    }
+
     public Coordinador(int id)
     {
-		// Crea el objeto cargando sus valores de la base de datos
-    	DB myDB = new DB(DB_SERVER,DB_NAME);
-    	Object[] tupla = myDB.Select("SELECT * FROM Coordinador WHERE ID = '" + id + "';").get(0);
-    	
-    	this.id = (int)tupla[0];
-    	this.name = (String)tupla[1];
-    	this.surname = (String)tupla[2];
-        //this.image = (Image)tupla[3];
-    	this.sex = (String)tupla[4];
-    	this.birthDate = (Date)tupla[5];
-    	this.entryDate = (Date)tupla[6];
-    	this.exitDate = (Date)tupla[7];
-    	this.privilege = (int)tupla[8];
-    	this.address = (String)tupla[9];
-    	this.phoneNumber = (String)tupla[10];
-    	this.job = (String)tupla[11];
-    	this.comments = (String)tupla[12];
+    	// Crea el objeto cargando sus valores de la base de datos
+       	DB myDB = new DB(DB_SERVER,DB_NAME);
+       	Object[] tupla = myDB.Select("SELECT * FROM Coordinador WHERE persona_id = " + person_id + ";").get(0);
+       	
+       	this.person_id = (int)tupla[0];
+        this.project_id = (int)tupla[1];
+       	this.privilege = (int)tupla[2];
+        this.job = (String)tupla[3];
+        this.phoneNumber = (String)tupla[4];
+       	this.address = (String)tupla[5];
     }
-    
-    public Coordinador(String name, String surname, String sex, Date birthDate, Date entryDate, Date exitDate, int privilege, String address, String phoneNumber, String job, String comments) //TODO: image
-    {
-    	// Da formato a las fechas para insertarlas en la base de datos
-        String birthDateToStr = formatDate(birthDate); 
-        String entryDateToStr = formatDate(entryDate); 
-        String exitDateToStr = formatDate(exitDate); 
-    	
-		// Crea el objeto y lo inserta en la base de datos
-    	DB myDB = new DB(DB_SERVER,DB_NAME);
-    	myDB.Insert("INSERT INTO Coordinador VALUES('" + name +
-    			"', '" + surname + "', '" + sex + "', " + birthDateToStr +
-    			", " + entryDateToStr + ", " + exitDateToStr + ", " + privilege + 
-    			", '" + address + "', " + phoneNumber + ", '" + job +
-    			"', '" + comments + "');");
-    	
-     	// Para obtener el ID asignado al coordinador
-     	Object[] tupla = myDB.Select("SELECT @@IDENTITY").get(0);
-     	
-     	this.id = Integer.valueOf(((Number)tupla[0]).intValue());
-     	this.name = name;
-     	this.surname = surname;
-     	//this.image = image;
-     	this.sex = sex;
-     	this.birthDate = birthDate;
-     	this.entryDate = entryDate;
-     	this.exitDate = exitDate;
-     	this.privilege = privilege;
-     	this.address = address;
-     	this.phoneNumber = phoneNumber;
-     	this.job = job;
-     	this.comments = comments;
+        
+    public Coordinador(int person_id, int project_id, int privilege, String job, String phoneNumber, String address)
+    {        	
+        // Crea el objeto y lo inserta en la base de datos
+        DB myDB = new DB(DB_SERVER,DB_NAME);
+        myDB.Insert("INSERT INTO Coordinador VALUES(" + person_id +
+    	       		", " + project_id + ", " + privilege + ", '" + job +
+       			    "', '" + phoneNumber + "', '" + address + "');");
+
+        this.person_id = person_id;
+        this.project_id = project_id;
+        this.privilege = privilege;
+        this.job = job;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
+
     public void DeleteAgent()
     {
-		// Borra la entrada de la base de datos y deja en null los valores
-    	DB myDB = new DB(DB_SERVER,DB_NAME);
-    	myDB.Delete("DELETE FROM Coordinador WHERE id ="+ this.id + ";");    	
+    	// Borra la entrada de la base de datos y deja en null los valores
+       	DB myDB = new DB(DB_SERVER,DB_NAME);
+       	myDB.Delete("DELETE FROM Coordinador WHERE persona_id ="+ this.person_id + ";");    	
+            
+     	this.person_id = -1;
+        this.project_id = -1;
+        this.privilege = -1;
+        this.job = null;
+        this.phoneNumber = null;
+        this.address = null;
+    }
         
-    	this.id = -1;
-     	this.name = null;
-     	this.surname = null;
-     	//this.image = image;
-     	this.sex = null;
-     	this.birthDate = null;
-     	this.entryDate = null;
-     	this.exitDate = null;
-     	this.privilege = -1;
-     	this.address = null;
-     	this.phoneNumber = null;
-     	this.job = null;
-     	this.comments = null;
-    }
-    
     public String formatDate(Date date){
-    	if(date!=null) {
-    		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        	return "'" + format.format(date) + "'";
-    	} else {
-    		return null;
-    	}
-    	
+      	if(date!=null) {
+       		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+           	return "'" + format.format(date) + "'";
+       	} else {
+       		return null;
+       	}
+        	
     }
-    
+        
     public String toString()
-    {
-    	//TODO: los privilegios no deben imprimir el int sino su nombre o nivel correspondiente
-    	
-        return id + "->\t" + name + " " + surname + "\n\t//Sexo: " + sex + "\n\t//Nacimiento: " + birthDate
-        		+ "\n\t//Alta: " + entryDate + "\n\t//Baja: " + exitDate + "\n\t//Privilegios: " + privilege
-        		+ "\n\t//Direccion: " + address + "\n\t//Telefono: " + phoneNumber + "\n\t//Trabajo: " + job
-        		+ "\n\t//Observaciones: " + comments;
+    {        	
+        return person_id + "->\t" + "\n\t//Proyecto: " + project_id + "\n\t//Nivel de privilegios: " + privilege
+         		  + "\n\t//Posicion: " + job + "\n\t//Numero de telefono: " + phoneNumber + "\n\t//Direccion: "
+                  + address;
     }
-    
+        
     /*---------------------------------------------------------------*/
     /*-------------------------GETTERS-------------------------------*/
     /*---------------------------------------------------------------*/
-    
-	public int getId() {
-		return id;
-	}
-	public String getName() {
-		return name;
-	}
-	public String getSurname() {
-		return surname;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public Date getBirthDate() {
-		return birthDate;
-	}
-	public Date getEntryDate() {
-		return entryDate;
-	}
-	public Date getExitDate() {
-		return exitDate;
-	}
-	public int getPrivilege() {
-		return privilege;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public String getJob() {
-		return job;
-	}
-	public String getComments() {
-		return comments;
-	}
-	
-	/*---------------------------------------------------------------*/
-	/*-------------------------SETTERS-------------------------------*/
-	/*---------------------------------------------------------------*/
-	
-	public void setName(String name) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	myDB.Update("UPDATE Coordinador SET Nombre= '" + name + "' WHERE ID=" + this.id + ";");
-		this.name = name;
-	}
-	public void setSurname(String surname) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	myDB.Update("UPDATE Coordinador SET Apellidos= '" + surname + "' WHERE ID=" + this.id + ";");
-		this.surname = surname;
-	}
-	public void setSex(String sex) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-       	 	myDB.Update("UPDATE Coordinador SET Sexo= '" + sex + "' WHERE ID=" + this.id + ";");
-		this.sex = sex;
-	}
-	public void setBirthDate(Date birthDate) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	String DateToStr = formatDate(birthDate); 
-        	
-        	myDB.Update("UPDATE Coordinador SET FechaNacimiento=" + DateToStr + " WHERE ID=" + this.id + ";");
-		this.birthDate = birthDate;
-	}
-	public void setEntryDate(Date entryDate) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	String DateToStr = formatDate(entryDate); 
-        	
-        	myDB.Update("UPDATE Coordinador SET FechaNacimiento=" + DateToStr + " WHERE ID=" + this.id + ";");
-		this.entryDate = entryDate;
-	}
-	public void setExitDate(Date exitDate) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	String DateToStr = formatDate(exitDate); 
-        	
-        	myDB.Update("UPDATE Coordinador SET FechaNacimiento=" + DateToStr + " WHERE ID=" + this.id + ";");
-		this.exitDate = exitDate;
-	}
-	public void setPrivilege(int privilege) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	myDB.Update("UPDATE Coordinador SET Privilegios=" + privilege + " WHERE ID=" + this.id + ";");
-		this.privilege = privilege;
-	}
-	public void setAddress(String address) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	myDB.Update("UPDATE Coordinador SET Direcccion='" + address + "' WHERE ID=" + this.id + ";");
-		this.address = address;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	myDB.Update("UPDATE Coordinador SET Telefono=" + privilege + " WHERE ID=" + this.id + ";");
-		this.phoneNumber = phoneNumber;
-	}
-	public void setJob(String job) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	myDB.Update("UPDATE Coordinador SET Trabajo='" + job + "' WHERE ID=" + this.id + ";");
-		this.job = job;
-	}
-	public void setComments(String comments) {
-		DB myDB = new DB(DB_SERVER,DB_NAME);
-        	myDB.Update("UPDATE Coordinador SET Observaciones='" + comments + "' WHERE ID=" + this.id + ";");
-		this.comments = comments;
-	}
-    
+        
+    public int getPersonId() {
+    	return person_id;
+    }
+
+    public int getProjectId() {
+    	return project_id;
+    }
+
+    public int getPrivilege() {
+    	return privilege;
+    }
+
+    public String getJob() {
+    	return job;
+    }
+
+    public String getPhoneNumber() {
+    	return phoneNumber;
+    }
+
+    public String getAddress() {
+    	return address;
+    }
+    	    	
+    /*---------------------------------------------------------------*/
+    /*-------------------------SETTERS-------------------------------*/
+    /*---------------------------------------------------------------*/
+    	
+    public void setProjectId(int project_id) 
+    {
+    	DB myDB = new DB(DB_SERVER,DB_NAME);
+       	myDB.Update("UPDATE Coordinador SET proyecto_id= " + proejct_id + " WHERE persona_id=" + this.person_id + ";");
+    	this.project_id = project_id;
+    }
+
+    public void setPrivilege(int privilege) 
+    {
+    	DB myDB = new DB(DB_SERVER,DB_NAME);  º0
+       	myDB.Update("UPDATE Coordinador SET nivelPermisos= '" + privilege + "' WHERE persona_id=" + this.person_id + ";");
+    	this.privilege = privilege;
+    }
+
+    public void setJob(String job) 
+    {
+    	DB myDB = new DB(DB_SERVER,DB_NAME);
+     	myDB.Update("UPDATE Coordinador SET Posicion= '" + job + "' WHERE persona_id=" + this.person_id + ";");
+    	this.job = job;
+    }
+
+    public void setPhoneNumber(String phoneNumber) 
+    {
+    	DB myDB = new DB(DB_SERVER,DB_NAME);
+        myDB.Update("UPDATE Coordinador SET telefono= '" + phoneNumber + "' WHERE persona_id=" + this.person_id + ";");
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(String address) 
+    {
+    	DB myDB = new DB(DB_SERVER,DB_NAME);
+      	myDB.Update("UPDATE Coordinador SET direccion='" + address + "' WHERE persona_id=" + this.person_id + ";");
+    	this.address = address;
+    }
 }
