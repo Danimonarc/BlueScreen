@@ -67,14 +67,13 @@ public class ConsultaProyectos extends JFrame {
 		panel.add(botonAceptar);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "ID", "Lugar de nacimiento", "Lugar de residencia"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "ID"}));
 		panel.add(comboBox);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton modificar = new JButton("Modificar");
-		panel_1.add(modificar);
+		
 		
 		JButton eliminar = new JButton("Eliminar\r\n");
 		panel_1.add(eliminar);
@@ -83,13 +82,16 @@ public class ConsultaProyectos extends JFrame {
 		panel_1.add(btnVolver);
 		String[] colums = {"Nombre", "Lugar"};
 		
+		/*JButton modificar = new JButton("Modificar");
+		panel_1.add(modificar);
+		
 		JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//new VistaProyecto(null).setVisible(true);
 			}
-		});
+		});*/
 		
 		JTable table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -98,10 +100,11 @@ public class ConsultaProyectos extends JFrame {
 			},
 			colums
 		));
-		//cambiar aqui a proyecto
+		
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
+		
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		for (Proyecto b :Proyecto.ProjectList()) 
 		{
@@ -121,29 +124,24 @@ public class ConsultaProyectos extends JFrame {
 					Object[] bena = {ben.getName(),ben.getLocation()};
 					
 					modelo.addRow(bena);
-				}
-				
-				
+				}	
 			}});
 		
 		
 		
-		modificar.addActionListener(new ActionListener() {
+		/*modificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new VistaNino(new Beneficiario(id)).setVisible(true);
-				
-				
-				
-				
-			}});
+				new VistaProyecto(new Proyecto(id)).setVisible(true);
+									
+			}});*/
 
 		eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int id;
-				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new Beneficiario(id).DeleteBeneficiary();
+				String id;
+				id = table.getValueAt(table.getSelectedRow(), 0).toString();
+				
 				}});
 		
 		

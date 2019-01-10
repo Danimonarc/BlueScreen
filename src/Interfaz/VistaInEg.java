@@ -1,5 +1,5 @@
 package Interfaz;
-
+import prototype.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -33,7 +33,7 @@ public class VistaInEg extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VistaInEg frame = new VistaInEg();
+					VistaInEg frame = new VistaInEg(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class VistaInEg extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaInEg() {
+	public VistaInEg(Movimiento m) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -97,9 +97,17 @@ public class VistaInEg extends JFrame {
 		proyectotxt.setColumns(10);
 		
 		JLabel lblId = new JLabel("ID*");
+		btnEliminar.setEnabled(false);
 		
 		JLabel lblNewLabel = new JLabel("Proyecto");
-		
+		if(m !=null ) 
+		{
+			importetxt.setText(m.getQuantity()+"");
+			proyectotxt.setText(new Proyecto(m.getProject_id()).getName());
+			idtxt.setText(m.getId()+"");
+			fechaEje.setDate(m.getTransactionDate());
+			btnEliminar.setEnabled(true);
+		}
 		JLabel warning = new JLabel("Los campos con *  son obligatorios");
 		warning.setForeground(SystemColor.menu);
 		GroupLayout gl_panelCentral = new GroupLayout(panelCentral);
@@ -190,12 +198,14 @@ public class VistaInEg extends JFrame {
 				}
 				else 
 				{
-					
+					new Movimiento(Integer.parseInt(idtxt.getText()), fechaEje.getDate(), Float.parseFloat(importetxt.getText()), "");
+					dispose();
 				}
 			}
 		});
 		cancelarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
 	}

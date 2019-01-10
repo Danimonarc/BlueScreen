@@ -16,11 +16,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import prototype.Beneficiario;
+import prototype.Persona;
 import prototype.Socio;
 
 public class NinosUser extends JFrame {
 
 	private JPanel contentPane;
+	Persona aux;
 
 	/**
 	 * Launch the application.
@@ -42,7 +45,7 @@ public class NinosUser extends JFrame {
 	 * Create the frame.
 	 * @param soc 
 	 */
-	public NinosUser(Socio soc) {
+	public NinosUser() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -77,7 +80,12 @@ public class NinosUser extends JFrame {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		
+		for (Beneficiario b :Beneficiario.BeneficiaryList()) 
+		{
+			aux = new Persona(b.getPersonId());
+			Object[] bena = {aux.getName(),aux.getBirthDate(), aux.getId()};
+			modelo.addRow(bena);
+		}
 		
 		contentPane.add(table, BorderLayout.CENTER);
 		btnVolver.addActionListener(new ActionListener() {

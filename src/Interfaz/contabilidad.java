@@ -54,14 +54,25 @@ public class contabilidad extends JFrame {
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		
 		JButton ingresosBtn = new JButton("Ingresos");
+		ingresosBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new consultaIngresoEgreso().setVisible(true);
+			}
+		});
 		
 		JButton egresosBtn = new JButton("Egreso");
+		egresosBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new consultaIngresoEgreso().setVisible(true);
+			}
+		});
 		
 		JButton saldosBtn = new JButton("Saldos");
 		
 		JButton proyectsosBtn = new JButton("Proyectos");
 		proyectsosBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				new ConsultaProyectos().setVisible(true);
 			}
 		});
 		

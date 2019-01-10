@@ -75,23 +75,23 @@ public class ConsultaAgente extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton modificar = new JButton("Modificar");
-		panel_1.add(modificar);
+		/*JButton modificar = new JButton("Modificar");
+		panel_1.add(modificar);*/
 		
 		JButton eliminar = new JButton("Eliminar\r\n");
 		panel_1.add(eliminar);
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
+		String[] colums = {"Nombre", "Telefono", "Localidad"};
 		
-		JButton btnAdd = new JButton("A\u00F1adir");
+		/*JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new VistaNino(null).setVisible(true);
 			}
-		});
+		});*/
 		
 		JTable table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -130,17 +130,15 @@ public class ConsultaAgente extends JFrame {
 		
 		
 		
-		modificar.addActionListener(new ActionListener() {
+		/*modificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
 				new VistaNino(new Beneficiario(id)).setVisible(true);
-				
-				
-				
-				
-			}});
+			}});*/
 
+		
+		
 		eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;

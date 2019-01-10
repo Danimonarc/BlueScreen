@@ -32,7 +32,7 @@ public class CartasNiños extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CartasNiños frame = new CartasNiños(null);
+					CartasNiños frame = new CartasNiños();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class CartasNiños extends JFrame {
 	 * Create the frame.
 	 * @param soc 
 	 */
-	public CartasNiños(Socio soc) {
+	public CartasNiños() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

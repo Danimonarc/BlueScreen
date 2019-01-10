@@ -96,7 +96,7 @@ public class consulta extends JFrame {
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
+		String[] colums = {"Nombre", "Fecha de nacimiento", "ID"};
 		
 		JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);

@@ -1,8 +1,9 @@
 package Interfaz;
-
+import prototype.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,8 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import prototype.Beneficiario;
 import javax.swing.JComboBox;
 import com.toedter.components.JSpinField;
 import com.toedter.calendar.JDateChooser;
@@ -25,7 +24,7 @@ public class consultaIngresoEgreso extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -79,7 +78,7 @@ public class consultaIngresoEgreso extends JFrame {
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
+		String[] colums = {"Cantidad", "Fecha", "ID"};
 		
 		JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);
@@ -100,6 +99,13 @@ public class consultaIngresoEgreso extends JFrame {
 		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
+		for(Movimiento m : Movimiento.TransactionList()) 
+		{
+			
+			Object[] bena = {m.getQuantity(),m.getTransactionDate(), m.getDescription(),};
+			modelo.addRow(bena);
+		}
+		
 		botonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -111,7 +117,7 @@ public class consultaIngresoEgreso extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new VistaNino(new Beneficiario(id)).setVisible(true);
+				new VistaInEg(new Movimiento(id)).setVisible(true);
 				
 				
 				
@@ -122,7 +128,7 @@ public class consultaIngresoEgreso extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new Beneficiario(id).DeleteBeneficiary();
+				new Movimiento(id).DeleteTransaction();;
 				}});
 		
 		

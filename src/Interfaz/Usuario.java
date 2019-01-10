@@ -85,19 +85,19 @@ public class Usuario extends JFrame {
 		
 		textWeb = new JTextField();
 		textWeb.setColumns(10);
-		Socio soc = new Socio(1);
+		//Socio soc = new Socio(1);
 		
 		JButton cartasBtn = new JButton("Cartas");
 		cartasBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CartasNiños(soc).setVisible(true);
+				new CartasNiños().setVisible(true);
 			}
 		});
 		
 		JButton Niños = new JButton("Ni\u00F1os");
 		Niños.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new NinosUser(soc).setVisible(true);
+				new NinosUser().setVisible(true);
 			}
 		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -111,17 +111,16 @@ public class Usuario extends JFrame {
 						.addComponent(lblFax)
 						.addComponent(lblWeb)
 						.addComponent(cartasBtn, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(18)
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(textWeb, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
 								.addComponent(faxTlf)
 								.addComponent(textTlf)
 								.addComponent(textEmail))
 							.addContainerGap(133, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel_1.createSequentialGroup()
 							.addComponent(Niños, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
 							.addGap(55))))
 		);
