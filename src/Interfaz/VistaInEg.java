@@ -20,8 +20,6 @@ import java.awt.SystemColor;
 public class VistaInEg extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField beneficiariotxt;
-	private JTextField deudortxt;
 	private JTextField importetxt;
 	private JTextField idtxt;
 	private JTextField proyectotxt;
@@ -47,7 +45,7 @@ public class VistaInEg extends JFrame {
 	 */
 	public VistaInEg(Movimiento m) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 334);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,16 +69,6 @@ public class VistaInEg extends JFrame {
 		JPanel panelCentral = new JPanel();
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		
-		beneficiariotxt = new JTextField();
-		beneficiariotxt.setColumns(10);
-		
-		deudortxt = new JTextField();
-		deudortxt.setColumns(10);
-		
-		JLabel lblBeneficiaro = new JLabel("Beneficiaro*");
-		
-		JLabel deudorlb = new JLabel("Deudor*");
-		
 		importetxt = new JTextField();
 		importetxt.setColumns(10);
 		
@@ -96,7 +84,7 @@ public class VistaInEg extends JFrame {
 		proyectotxt = new JTextField();
 		proyectotxt.setColumns(10);
 		
-		JLabel lblId = new JLabel("ID*");
+		JLabel lblId = new JLabel("ID");
 		btnEliminar.setEnabled(false);
 		
 		JLabel lblNewLabel = new JLabel("Proyecto");
@@ -114,53 +102,38 @@ public class VistaInEg extends JFrame {
 		gl_panelCentral.setHorizontalGroup(
 			gl_panelCentral.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelCentral.createSequentialGroup()
-					.addGap(72)
-					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelCentral.createSequentialGroup()
-							.addComponent(lblFechaDeEjecucin)
-							.addContainerGap())
-						.addGroup(gl_panelCentral.createSequentialGroup()
-							.addGroup(gl_panelCentral.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panelCentral.createSequentialGroup()
-									.addComponent(fechaEje, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-									.addComponent(lblImporte)
-									.addGap(18)
-									.addComponent(importetxt, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelCentral.createSequentialGroup()
-									.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-										.addComponent(beneficiariotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblBeneficiaro))
-									.addPreferredGap(ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-									.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-										.addComponent(deudorlb)
-										.addComponent(deudortxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_panelCentral.createSequentialGroup()
-									.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblId)
-										.addComponent(idtxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-									.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblNewLabel)
-										.addComponent(proyectotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-							.addGap(74))))
-				.addGroup(gl_panelCentral.createSequentialGroup()
 					.addGap(123)
 					.addComponent(warning)
-					.addContainerGap(255, Short.MAX_VALUE))
+					.addContainerGap(81, Short.MAX_VALUE))
+				.addGroup(gl_panelCentral.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblId)
+					.addGap(165)
+					.addComponent(lblNewLabel)
+					.addContainerGap(171, Short.MAX_VALUE))
+				.addGroup(gl_panelCentral.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(idtxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(proyectotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(65, Short.MAX_VALUE))
+				.addGroup(gl_panelCentral.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblFechaDeEjecucin)
+						.addComponent(fechaEje, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(55)
+					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblImporte)
+						.addGroup(gl_panelCentral.createSequentialGroup()
+							.addGap(10)
+							.addComponent(importetxt, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
+					.addGap(72))
 		);
 		gl_panelCentral.setVerticalGroup(
 			gl_panelCentral.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelCentral.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_panelCentral.createParallelGroup(Alignment.TRAILING)
-						.addComponent(deudorlb)
-						.addComponent(lblBeneficiaro))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
-						.addComponent(beneficiariotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(deudortxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addContainerGap()
 					.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblId)
 						.addComponent(lblNewLabel))
@@ -168,19 +141,26 @@ public class VistaInEg extends JFrame {
 					.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
 						.addComponent(idtxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(proyectotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(lblFechaDeEjecucin)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
-							.addComponent(importetxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblImporte))
-						.addComponent(fechaEje, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+					.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblFechaDeEjecucin)
+						.addComponent(lblImporte))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelCentral.createParallelGroup(Alignment.TRAILING)
+						.addComponent(fechaEje, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(importetxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
 					.addComponent(warning)
 					.addContainerGap())
 		);
 		panelCentral.setLayout(gl_panelCentral);
+		
+		//Edited
+		idtxt.setEnabled(false);
+		if(m!=null) {
+			btnEliminar.setEnabled(true);
+			btnModificar.setEnabled(false);
+		}
 		
 		//
 		//Listeners
@@ -192,14 +172,17 @@ public class VistaInEg extends JFrame {
 		});
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(idtxt.getText().equals("") || deudortxt.getText().equals("") || importetxt.getText().equals("")|| beneficiariotxt.getText().equals("")) 
-				{
-					warning.setForeground(SystemColor.RED);
-				}
-				else 
-				{
-					new Movimiento(Integer.parseInt(idtxt.getText()), fechaEje.getDate(), Float.parseFloat(importetxt.getText()), "");
-					dispose();
+				if(m==null) {
+					
+					if(importetxt.getText().equals("")) 
+					{
+						warning.setForeground(SystemColor.RED);
+					}
+					else 
+					{
+						new Movimiento(Integer.parseInt(proyectotxt.getText()), fechaEje.getDate(), Float.parseFloat(importetxt.getText()), "");
+						dispose();
+					}
 				}
 			}
 		});

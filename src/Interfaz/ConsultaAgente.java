@@ -75,23 +75,23 @@ public class ConsultaAgente extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		/*JButton modificar = new JButton("Modificar");
-		panel_1.add(modificar);*/
+		//JButton modificar = new JButton("Modificar");
+		//panel_1.add(modificar);
 		
 		JButton eliminar = new JButton("Eliminar\r\n");
 		panel_1.add(eliminar);
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Nombre", "Telefono", "Localidad"};
+		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
 		
-		/*JButton btnAdd = new JButton("A\u00F1adir");
-		panel_1.add(btnAdd);
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				new VistaNino(null).setVisible(true);
-			}
-		});*/
+		//JButton btnAdd = new JButton("A\u00F1adir");
+		//panel_1.add(btnAdd);
+		//btnAdd.addActionListener(new ActionListener() {
+			//public void actionPerformed(ActionEvent arg0) {
+				//new VistaNino(null).setVisible(true);
+			//}
+		//});
 		
 		JTable table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -107,7 +107,7 @@ public class ConsultaAgente extends JFrame {
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		for (Coordinador b :Coordinador.AgentList()) 
 		{
-			Object[] bena = {new Persona(b.getPersonId()).getName(),b.getPhoneNumber()};
+			Object[] bena = {new Persona(b.getPersonId()).getName(),b.getPhoneNumber(),b.getPersonId()};
 			modelo.addRow(bena);
 		}
 		
@@ -120,7 +120,7 @@ public class ConsultaAgente extends JFrame {
 				modelo.setRowCount(0);
 				if(!ben.equals(null)) 
 				{
-					Object[] bena = {new Persona(ben.getPersonId()).getName(),ben.getPhoneNumber()};
+					Object[] bena = {new Persona(ben.getPersonId()).getName(),ben.getPhoneNumber(),ben.getPersonId()};
 					
 					modelo.addRow(bena);
 				}
@@ -135,15 +135,14 @@ public class ConsultaAgente extends JFrame {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
 				new VistaNino(new Beneficiario(id)).setVisible(true);
-			}});*/
-
-		
-		
+				
+			}});
+*/
 		eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new Beneficiario(id).DeleteBeneficiary();
+				new Coordinador(id).DeleteAgent();
 				}});
 		
 		

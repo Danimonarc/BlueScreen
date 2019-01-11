@@ -34,7 +34,7 @@ public class VistaNino extends JFrame {
 	private JTextField nota;
 
 	private String name, lugarN, lugarR, project, bec, comentario;
-	private int mark;
+	private float mark;
 	private Date birthDate, entryDate, exitDate;
 	private boolean nombreO, fechaEnO, proyectoO;
 	private Persona be;
@@ -59,7 +59,6 @@ public class VistaNino extends JFrame {
 	 */
 	
 	public VistaNino(Beneficiario ben) {
-		be = new Persona(ben.getPersonId());
 //				DEFINICIÓN BASE DE LAS FECHAS
 		birthDate = null;
 		entryDate = null;
@@ -274,6 +273,7 @@ public class VistaNino extends JFrame {
 		else 
 		{
 			añadir.setEnabled(false);
+			be = new Persona(ben.getPersonId());
 		}
 		
 //		INICIALIZACIÓN DE VARIABLES MODO EDITAR
@@ -338,14 +338,14 @@ public class VistaNino extends JFrame {
 						name = nombre.getText();
 						bec = beca.getText();
 						project = proyecto.getText();
-						mark = Integer.parseInt(nota.getText());
+						mark = Float.parseFloat(nota.getText());
 						lugarN = lugarNac.getText();
 						lugarR = lugarRes.getText();
 						comentario = observaciones.getText();
 						
 						Persona auxi =new Persona(name,"","Male",1,birthDate,entryDate,exitDate,comentario);
 						new Beneficiario(auxi.getId(), 1, 1, entryDate, exitDate, bec, mark, lugarN, lugarR);
-								;
+						;
 						
 					} catch (NumberFormatException e) {
 						new Dialogo(e.getMessage(),true, true);
@@ -371,7 +371,7 @@ public class VistaNino extends JFrame {
 				be.setName(nombre.getText());
 				be.setBirthDate(fechaNac.getDate());
 				ben.setProjectEntryDate(fechaEn.getDate());
-				ben.setMark(Integer.parseInt(nota.getText()));
+				ben.setMark(Float.parseFloat(nota.getText()));
 				ben.setBirthCommunity(lugarNac.getText());
 				ben.setLivingCommunity(lugarRes.getText());
 				//ben.setPro(new Proyecto(proyecto.getText()));

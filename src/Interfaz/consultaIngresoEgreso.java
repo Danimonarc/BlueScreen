@@ -70,7 +70,7 @@ public class consultaIngresoEgreso extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton modificar = new JButton("Modificar");
+		JButton modificar = new JButton("ver");
 		panel_1.add(modificar);
 		
 		JButton eliminar = new JButton("Eliminar\r\n");
@@ -78,13 +78,13 @@ public class consultaIngresoEgreso extends JFrame {
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Cantidad", "Fecha", "ID"};
+		String[] colums = {"ID", "Cantidad", "Fecha", "Descripcion"};
 		
 		JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new VistaNino(null).setVisible(true);
+				new VistaInEg(null).setVisible(true);
 			}
 		});
 		
@@ -102,7 +102,7 @@ public class consultaIngresoEgreso extends JFrame {
 		for(Movimiento m : Movimiento.TransactionList()) 
 		{
 			
-			Object[] bena = {m.getQuantity(),m.getTransactionDate(), m.getDescription(),};
+			Object[] bena = {m.getId(), m.getQuantity(),m.getTransactionDate(), m.getDescription(),};
 			modelo.addRow(bena);
 		}
 		
@@ -116,7 +116,7 @@ public class consultaIngresoEgreso extends JFrame {
 		modificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
-				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
+				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
 				new VistaInEg(new Movimiento(id)).setVisible(true);
 				
 				
