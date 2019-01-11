@@ -12,7 +12,7 @@ public class Movimiento {
 	private int id;
     private int project_id;
     private Date transactionDate;
-    private double quantity;
+    private float quantity;
     private String description;
 
     public static List<Movimiento> TransactionList()
@@ -39,17 +39,17 @@ public class Movimiento {
         this.id = (int)tupla[0];
         this.project_id = (int)tupla[1];
         this.transactionDate = (Date)tupla[2];
-        this.quantity = (double)tupla[3];
+        this.quantity = (float)tupla[3];
         this.description = (String)tupla[4];
     }
 
-    public Movimiento(int project_id, Date transactionDate, double quantity, String description)
+    public Movimiento(int project_id, Date transactionDate, float quantity, String description)
     {       	
     	// Crea el objeto y lo inserta en la base de datos
         DB myDB = new DB(DB_SERVER,DB_NAME);
         String transactionDateToStr = formatDate(transactionDate); 
 
-        myDB.Insert("INSERT INTO Movimiento VALUES(" + project_id + ", '" + transactionDateToStr + "', " + quantity +
+        myDB.Insert("INSERT INTO Movimiento VALUES(" + project_id + ", " + transactionDateToStr + ", " + quantity +
             ", '" + description + "');");
         
         // Para obtener el ID asignado a la transaccion
@@ -78,7 +78,7 @@ public class Movimiento {
     public String formatDate(Date date)
     {
         if(date!=null) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
            	return "'" + format.format(date) + "'";
 
         } else {
@@ -115,7 +115,7 @@ public class Movimiento {
         return transactionDate;
     }
 
-    public double getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 

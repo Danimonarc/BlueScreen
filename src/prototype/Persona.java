@@ -60,8 +60,8 @@ public class Persona {
     	// Crea el objeto y lo inserta en la base de datos
         DB myDB = new DB(DB_SERVER,DB_NAME);
         myDB.Insert("INSERT INTO Persona VALUES('" + name +
-        		"', '" + surname + "', '" + sex + "', " + image + " '" + birthdateToStr +
-        		"', '" + entrydateToStr + "', '" + exitdateToStr + "', '" +
+        		"', '" + surname + "', '" + sex + "', " + image + ", " + birthdateToStr +
+        		", " + entrydateToStr + ", " + exitdateToStr + ", '" +
         		comments + "');");
         
         // Para obtener el ID asignado a la persona
@@ -98,7 +98,7 @@ public class Persona {
     public String formatDate(Date date)
     {
         if(date!=null) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
            	return "'" + format.format(date) + "'";
 
         } else {

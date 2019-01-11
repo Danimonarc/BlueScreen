@@ -27,7 +27,7 @@ public class Egreso {
     	return myList;
     }
 
-    public Egreso(int id)
+    public Egreso(int movement_id)
     {
     	// Crea el objeto cargando sus valores de la base de datos
         DB myDB = new DB(DB_SERVER,DB_NAME);
@@ -63,7 +63,7 @@ public class Egreso {
     public String formatDate(Date date)
     {
         if(date!=null) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
            	return "'" + format.format(date) + "'";
 
         } else {

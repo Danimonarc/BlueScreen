@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Testing {
 	public static void main(String[] args) {
-		for(Beneficiario p: Beneficiario.BeneficiaryList()) 
+		for(Coordinador p: Coordinador.AgentList()) 
 		{
 			System.out.println(p);	
 		}

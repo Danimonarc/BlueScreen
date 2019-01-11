@@ -15,7 +15,7 @@ public class Beneficiario {
     private Date projectEntryDate;
     private Date projectExitDate;
     private String scolarship;
-    private int mark;
+    private float mark;
     private String birthCommunity;
     private String livingCommunity;
 
@@ -45,12 +45,12 @@ public class Beneficiario {
         this.projectEntryDate = (Date)tupla[3];
         this.projectExitDate = (Date)tupla[4];
         this.scolarship = (String)tupla[5];
-        this.mark = (int)tupla[6];
+        this.mark = (float)tupla[6];
         this.birthCommunity = (String)tupla[7];
         this.livingCommunity = (String)tupla[8];
     }
 
-    public Beneficiario(int person_id, int project_id, int coordinator_id, Date projectEntryDate, Date projectExitDate, String scolarship, int mark, String birthCommunity, String livingCommunity)
+    public Beneficiario(int person_id, int project_id, int coordinator_id, Date projectEntryDate, Date projectExitDate, String scolarship, float mark, String birthCommunity, String livingCommunity)
     {
         // Da formato a las fechas para insertarlas en la base de datos
         String projectEntryDateToStr = formatDate(projectEntryDate); 
@@ -59,8 +59,8 @@ public class Beneficiario {
     	// Crea el objeto y lo inserta en la base de datos
         DB myDB = new DB(DB_SERVER,DB_NAME);
         myDB.Insert("INSERT INTO Beneficiario VALUES(" + person_id +
-        		", " + project_id + ", " + coordinator_id + ", '" + projectEntryDateToStr +
-                "', '" + projectExitDateToStr + "', '" + scolarship + "', " + mark + 
+        		", " + project_id + ", " + coordinator_id + ", " + projectEntryDateToStr +
+                ", " + projectExitDateToStr + ", '" + scolarship + "', " + mark + 
                 ", '" + birthCommunity + "', '" + livingCommunity + "');");
                 
         this.person_id = person_id;
@@ -94,7 +94,7 @@ public class Beneficiario {
     public String formatDate(Date date)
     {
         if(date!=null) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
            	return "'" + format.format(date) + "'";
 
         } else {
@@ -134,7 +134,7 @@ public class Beneficiario {
         DB myDB = new DB(DB_SERVER,DB_NAME);
         String dateToStr = formatDate(projectEntryDate); 
 
-        myDB.Update("UPDATE Beneficiario SET fechaAltaProyecto= '" + dateToStr + "' WHERE persona_id = " + this.person_id + ";");
+        myDB.Update("UPDATE Beneficiario SET fechaAltaProyecto= " + dateToStr + " WHERE persona_id = " + this.person_id + ";");
         this.projectEntryDate = projectEntryDate;
     }
 
@@ -143,18 +143,18 @@ public class Beneficiario {
         DB myDB = new DB(DB_SERVER,DB_NAME);
         String dateToStr = formatDate(projectExitDate); 
 
-        myDB.Update("UPDATE Beneficiario SET fechaBajaProyecto= '" + dateToStr + "' WHERE persona_id = " + this.person_id + ";");
+        myDB.Update("UPDATE Beneficiario SET fechaBajaProyecto= " + dateToStr + " WHERE persona_id = " + this.person_id + ";");
         this.projectExitDate = projectExitDate;
     }
 
     public void setScolarship(String scolarship) 
     {
         DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Beneficiario SET beca= " + scolarship + " WHERE persona_id = " + this.person_id + ";");
+        myDB.Update("UPDATE Beneficiario SET beca= '" + scolarship + "' WHERE persona_id = " + this.person_id + ";");
         this.scolarship = scolarship;
     }
 
-    public void setMark(int mark) 
+    public void setMark(float mark) 
     {
         DB myDB = new DB(DB_SERVER,DB_NAME);
         myDB.Update("UPDATE Beneficiario SET notaCurso= " + mark + " WHERE persona_id = " + this.person_id + ";");
@@ -164,14 +164,14 @@ public class Beneficiario {
     public void setBirthCommunity(String birthCommunity) 
     {
         DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Beneficiario SET comunidadNacimiento= " + birthCommunity + " WHERE persona_id = " + this.person_id + ";");
+        myDB.Update("UPDATE Beneficiario SET comunidadNacimiento= '" + birthCommunity + "' WHERE persona_id = " + this.person_id + ";");
         this.birthCommunity = birthCommunity;
     }
 
     public void setLivingCommunity(String livingCommunity) 
     {
         DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Update("UPDATE Beneficiario SET comunidadResidencia= " + livingCommunity + " WHERE persona_id = " + this.person_id + ";");
+        myDB.Update("UPDATE Beneficiario SET comunidadResidencia= '" + livingCommunity + "' WHERE persona_id = " + this.person_id + ";");
         this.livingCommunity = livingCommunity;
     }
 
@@ -203,7 +203,7 @@ public class Beneficiario {
         return scolarship;
     }
 
-    public int getMark(){
+    public float getMark(){
         return mark;
     }
 

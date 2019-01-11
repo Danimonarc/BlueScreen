@@ -94,7 +94,7 @@ public class Socio {
     public String formatDate(Date date)
     {
         if(date!=null) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
            	return "'" + format.format(date) + "'";
 
         } else {

@@ -66,7 +66,7 @@ public class Proyecto {
     public String formatDate(Date date)
     {
         if(date!=null) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
            	return "'" + format.format(date) + "'";
 
         } else {
@@ -95,7 +95,7 @@ public class Proyecto {
     /*-------------------------GETTERS-------------------------------*/
     /*---------------------------------------------------------------*/
 	
-	public int getMovementId(){
+	public int getId(){
    		return id;
     }
     	
@@ -104,6 +104,6 @@ public class Proyecto {
     }
 
     public String getName() {
-        return location;
+        return name;
     }
 }
