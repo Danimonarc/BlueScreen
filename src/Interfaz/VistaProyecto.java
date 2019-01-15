@@ -29,12 +29,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JCheckBox;
 public class VistaProyecto extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField beneficiariotxt;
-	private JTextField idtxt;
-	private JTextField proyectotxt;
+	private JTextField locationText;
+	private JTextField idText;
+	private JTextField projectText;
 
 	/**
 	 * Launch the application.
@@ -57,7 +58,7 @@ public class VistaProyecto extends JFrame {
 	 */
 	public VistaProyecto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 511, 365);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -66,128 +67,102 @@ public class VistaProyecto extends JFrame {
 		JPanel botones = new JPanel();
 		contentPane.add(botones, BorderLayout.SOUTH);
 		
-		JButton cancelarBtn = new JButton("Volver");
+		JLabel warning = new JLabel("Los campos con *  son obligatorios");
+		warning.setForeground(SystemColor.menu);
 		
-		botones.add(cancelarBtn);
+		JButton acceptButton = new JButton("Aceptar");
 		
-		JButton btnEliminar = new JButton("Eliminar");
+		botones.add(acceptButton);
+		acceptButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(idText.getText().equals("") || projectText.getText().equals("") || locationText.getText().equals("")) 
+				{
+					warning.setForeground(SystemColor.RED);
+				}
+				else 
+				{
+					//TODO: añadir el proyecto a la base de datos
+				}
+			}
+		});
 		
-		botones.add(btnEliminar);
+		JButton cancelButton = new JButton("Cancelar");
 		
-		JButton btnModificar = new JButton("Aceptar");
-		
-		botones.add(btnModificar);
+		botones.add(cancelButton);
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO: Cerrar la ventana y volver a la anterior
+			}
+		});
 		
 		JPanel panelCentral = new JPanel();
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		
-		beneficiariotxt = new JTextField();
-		beneficiariotxt.setColumns(10);
+		locationText = new JTextField();
+		locationText.setColumns(10);
 		
-		JLabel lblBeneficiaro = new JLabel("Coordiador*");
+		idText = new JTextField();
+		idText.setColumns(10);
 		
-		JLabel lblImporte = new JLabel("Fecha de fin");
+		projectText = new JTextField();
+		projectText.setColumns(10);
 		
-		JDateChooser fechaIni = new JDateChooser();
+		JLabel idLabel = new JLabel("*Id:");
 		
-		JLabel lblFechaDeEjecucin = new JLabel("Fecha de inicio");
+		JLabel nameLabel = new JLabel("*Nombre:");
 		
-		idtxt = new JTextField();
-		idtxt.setColumns(10);
+		JLabel locationLabel = new JLabel("*Localizacion:");
 		
-		proyectotxt = new JTextField();
-		proyectotxt.setColumns(10);
-		
-		JLabel lblId = new JLabel("ID*");
-		
-		JLabel lblNewLabel = new JLabel("Nombre*");
-		
-		JLabel warning = new JLabel("Los campos con *  son obligatorios");
-		warning.setForeground(SystemColor.menu);
-		
-		JDateChooser FechaFin = new JDateChooser();
+		JCheckBox chckbxSede = new JCheckBox("Sede");
+		chckbxSede.setSelected(true);
 		GroupLayout gl_panelCentral = new GroupLayout(panelCentral);
 		gl_panelCentral.setHorizontalGroup(
 			gl_panelCentral.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelCentral.createSequentialGroup()
-					.addGap(72)
 					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelCentral.createSequentialGroup()
-							.addComponent(lblFechaDeEjecucin)
-							.addContainerGap())
-						.addGroup(gl_panelCentral.createSequentialGroup()
-							.addGroup(gl_panelCentral.createParallelGroup(Alignment.TRAILING)
-								.addComponent(fechaIni, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap()
+							.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panelCentral.createSequentialGroup()
 									.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblId)
-										.addComponent(idtxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(beneficiariotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblBeneficiaro))
-									.addPreferredGap(ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+										.addComponent(locationLabel)
+										.addComponent(nameLabel))
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-										.addComponent(proyectotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel)
-										.addComponent(lblImporte)
-										.addComponent(FechaFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-							.addGap(74))))
-				.addGroup(gl_panelCentral.createSequentialGroup()
-					.addGap(123)
-					.addComponent(warning)
-					.addContainerGap(136, Short.MAX_VALUE))
+										.addComponent(locationText, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+										.addComponent(projectText, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)))
+								.addGroup(gl_panelCentral.createSequentialGroup()
+									.addComponent(idLabel)
+									.addGap(99)
+									.addComponent(idText, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+									.addComponent(chckbxSede)
+									.addGap(72))))
+						.addGroup(gl_panelCentral.createSequentialGroup()
+							.addGap(123)
+							.addComponent(warning)))
+					.addContainerGap())
 		);
 		gl_panelCentral.setVerticalGroup(
 			gl_panelCentral.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelCentral.createSequentialGroup()
 					.addGap(23)
 					.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblBeneficiaro)
-						.addComponent(lblNewLabel))
-					.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(idLabel)
+						.addComponent(idText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(chckbxSede))
+					.addGap(26)
 					.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
-						.addComponent(beneficiariotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(proyectotxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(lblId)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(idtxt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+						.addComponent(nameLabel)
+						.addComponent(projectText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panelCentral.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFechaDeEjecucin)
-						.addComponent(lblImporte))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-						.addComponent(fechaIni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(FechaFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+						.addComponent(locationLabel)
+						.addComponent(locationText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
 					.addComponent(warning)
 					.addContainerGap())
 		);
 		panelCentral.setLayout(gl_panelCentral);
-		
-		//
-		//Listeners
-		//
-		
-		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(idtxt.getText().equals("") || proyectotxt.getText().equals("") || beneficiariotxt.getText().equals("")) 
-				{
-					warning.setForeground(SystemColor.RED);
-				}
-				else 
-				{
-					
-				}
-			}
-		});
-		cancelarBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 }	
 }
