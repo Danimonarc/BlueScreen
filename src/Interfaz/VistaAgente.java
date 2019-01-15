@@ -33,6 +33,12 @@ public class VistaAgente extends JFrame {
 	private JTextField projectText;
 	private JTextField phoneText;
 	private JTextField jobText;
+	
+	//global variables
+	private Coordinador coordinator = null;
+	private Persona person = null;
+	private Proyecto project = null;
+	//TODO: private int[] projectIdList; (cuando se listan los proyectos en el combo box, usar esto para guardar los distintos id)
 
 	/**
 	 * Launch the application.
@@ -55,20 +61,11 @@ public class VistaAgente extends JFrame {
 	 */
 	public VistaAgente(int id) {
 		//initialization of all the objects related with this person
-		Coordinador coordinator = null;
-		Persona person = null;
-		Proyecto project = null;
-		
 		if(id != -1) {
 			coordinator = new Coordinador(id);
 			person = new Persona(id);
 			project = new Proyecto(coordinator.getProjectId());
 		}
-		
-		Date birthDate = null;
-		Date entryDate = null;
-		Date exitDate = null;
-		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		
 		setTitle("Coordinador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,25 +105,6 @@ public class VistaAgente extends JFrame {
 		phoneText.setColumns(10);
 		phoneText.setBounds(141, 325, 361, 32);
 		contentPane.add(phoneText);
-		
-		JButton acceptButton = new JButton("Aceptar");
-		acceptButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				/*
-				 * TODO: añadir el coordinador (¿Mensaje de confirmacion?)
-				 */
-				if(id != -1) {  //Update mode (existing data)
-					
-					dispose();
-					
-				} else {  //Add mode (non-existing data)
-					
-					dispose();
-				}
-			}
-		});
-		acceptButton.setBounds(141, 723, 141, 35);
-		contentPane.add(acceptButton);
 		
 		JButton exitButton = new JButton("Salir");
 		exitButton.addActionListener(new ActionListener() {
@@ -220,6 +198,69 @@ public class VistaAgente extends JFrame {
 		commentText.setBounds(21, 600, 481, 88);
 		contentPane.add(commentText);
 		
+		JButton acceptButton = new JButton("Aceptar");
+		acceptButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {			
+				//Checking for mandatory data not filled
+				if(idText.getText() == "" || entryDateChooser.getDate() == null || jobText.getText() == "") {
+					//WARNING
+				} else {
+					//Form data into variables
+					//TODO: projectId = projectIdList[projectComboBox.getSelectedIndex()];
+					String name = nameText.getText();
+					String surname = surnameText.getText();
+					String sex = sexComboBox.getSelectedItem().toString();
+					Date birthDate = birthDateChooser.getDate();
+					String address = addressText.getText();
+					String phoneNumber = phoneText.getText();
+					String job = jobText.getText();
+					int privilege = privilegeComboBox.getSelectedIndex();
+					Date entryDate = entryDateChooser.getDate();
+					Date exitDate = exitDateChooser.getDate();
+					String comment = commentText.getText();
+					
+					/*
+					 * TODO: añadir el coordinador (¿Mensaje de confirmacion?)
+					 */
+					if(id != -1) {  //Update mode (existing data)
+						//Person data update
+						person.setName(name);
+						person.setSurname(surname);
+						person.setSex(sex);
+						person.setBirthDate(birthDate);
+						person.setEntryDate(entryDate);
+						person.setEntryDate(entryDate);
+						person.setComments(comment);
+						
+						//Coordinator data update
+						//coordinator.setProjectId(projectId);
+						coordinator.setPrivilege(privilege);
+						coordinator.setJob(job);
+						coordinator.setPhoneNumber(phoneNumber);
+						coordinator.setAddress(address);
+						
+						//Close the window
+						dispose();
+						
+					} else {  //Add mode (non-existing data)
+						//Persona(String name, String surname, String sex, int image, Date birthDate, Date entryDate, Date exitDate, String comments)
+						new Persona(name, surname, sex, 7, birthDate, entryDate, exitDate, comment);
+
+						//Coordinador(int person_id, int project_id, int privilege, String job, String phoneNumber, String address)
+						//TODO: projectId = projectIdList[projectComboBox.getSelectedIndex()];
+						new Coordinador(id, 1, privilege, job, phoneNumber, address);
+						
+						//Close the window
+						dispose();
+					}
+					
+				}
+			}
+		});
+		acceptButton.setBounds(141, 723, 141, 35);
+		contentPane.add(acceptButton);
+		
+		
 		//Initialize all the fields when updating data
 		if(id != -1) {  //Update mode
 			//Non-editable
@@ -246,8 +287,11 @@ public class VistaAgente extends JFrame {
 			
 			//TODO: set the list of projects in the comboBox
 			/* projectComboBox.setModel(
+			 * 		int i = 0;
 			 * 		foreach(project p : projectList()){
 			 * 			TextModel.add(p.getName());
+			 * 			projectIdList[i] = p.getId();
+			 * 			i++;
 			 * 		}
 			 *	);
 			*/
