@@ -12,9 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -89,9 +91,13 @@ public class ConsultaProyectos extends JFrame {
 		
 		JButton backButton = new JButton("Volver");
 		panel_1.add(backButton);
+		
 		String[] colums = {"Id", "Nombre", "Lugar"};
 		
+		JScrollPane scrollPane = new JScrollPane(); //scroll containing the table
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		JTable table = new JTable();
+		scrollPane.setViewportView(table); //to contain the table
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -101,7 +107,6 @@ public class ConsultaProyectos extends JFrame {
 		//cambiar aqui a proyecto
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		for (Proyecto b :Proyecto.ProjectList()) 
 		{
@@ -147,7 +152,7 @@ public class ConsultaProyectos extends JFrame {
 				}});
 		
 		
-		contentPane.add(table, BorderLayout.CENTER);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();}});

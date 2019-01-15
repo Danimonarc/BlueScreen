@@ -10,9 +10,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
@@ -78,7 +80,6 @@ public class ConsultaIngresoEgreso extends JFrame {
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"ID", "Cantidad", "Fecha", "Descripcion"};
 		
 		JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);
@@ -88,7 +89,12 @@ public class ConsultaIngresoEgreso extends JFrame {
 			}
 		});
 		
+		String[] colums = {"ID", "Cantidad", "Fecha", "Descripcion"};
+		
+		JScrollPane scrollPane = new JScrollPane(); //scroll containing the table
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		JTable table = new JTable();
+		scrollPane.setViewportView(table); //to contain the table
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -96,7 +102,6 @@ public class ConsultaIngresoEgreso extends JFrame {
 		));
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		
 		for(Movimiento m : Movimiento.TransactionList()) 
@@ -132,7 +137,7 @@ public class ConsultaIngresoEgreso extends JFrame {
 				}});
 		
 		
-		contentPane.add(table, BorderLayout.CENTER);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();}});

@@ -106,7 +106,7 @@ public class Login extends JFrame {
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new YourPath().setVisible(true);		}});
+				new MainScreen().setVisible(true);		}});
 		JButton forgot = new JButton("He olvidado la contrase\u00F1a");
 		panelSur.add(forgot);
 		forgot.addActionListener(new ActionListener() {

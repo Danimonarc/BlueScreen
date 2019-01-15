@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,7 @@ import javax.swing.AbstractListModel;
 */
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.LineBorder;
@@ -97,7 +99,6 @@ public class ConsultaNino extends JFrame {
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
 		
 		JButton btnAdd = new JButton("A\u00F1adir");
 		panel_1.add(btnAdd);
@@ -107,7 +108,12 @@ public class ConsultaNino extends JFrame {
 			}
 		});
 		
+		String[] colums = {"ID", "Cantidad", "Fecha", "Descripcion"};
+		
+		JScrollPane scrollPane = new JScrollPane(); //scroll containing the table
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		JTable table = new JTable();
+		scrollPane.setViewportView(table); //to contain the table
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -117,7 +123,6 @@ public class ConsultaNino extends JFrame {
 		
 		table.getColumnModel().getColumn(1).setPreferredWidth(53);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
 		for (Beneficiario b :Beneficiario.BeneficiaryList()) 
 		{
@@ -165,7 +170,7 @@ public class ConsultaNino extends JFrame {
 				}});
 		
 		
-		contentPane.add(table, BorderLayout.CENTER);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();}});
