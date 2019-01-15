@@ -51,7 +51,7 @@ public class ConsultaAgente extends JFrame {
 	 */
 	public ConsultaAgente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -75,8 +75,16 @@ public class ConsultaAgente extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		//JButton modificar = new JButton("Modificar");
-		//panel_1.add(modificar);
+		JButton btnAdd = new JButton("A\u00F1adir");
+		panel_1.add(btnAdd);
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new VistaAgente().setVisible(true);
+			}
+		});
+		
+		JButton modificar = new JButton("Modificar");
+		panel_1.add(modificar);
 		
 		JButton eliminar = new JButton("Eliminar\r\n");
 		panel_1.add(eliminar);
@@ -84,14 +92,6 @@ public class ConsultaAgente extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
 		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
-		
-		//JButton btnAdd = new JButton("A\u00F1adir");
-		//panel_1.add(btnAdd);
-		//btnAdd.addActionListener(new ActionListener() {
-			//public void actionPerformed(ActionEvent arg0) {
-				//new VistaNino(null).setVisible(true);
-			//}
-		//});
 		
 		JTable table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -130,20 +130,18 @@ public class ConsultaAgente extends JFrame {
 		
 		
 		
-		/*modificar.addActionListener(new ActionListener() {
+		modificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int id;
-				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new VistaNino(new Beneficiario(id)).setVisible(true);
-				
-			}});
-*/
+				new VistaAgente().setVisible(true);
+			}
+		});
+
 		eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
 				new Coordinador(id).DeleteAgent();
-				}});
+			}});
 		
 		
 		contentPane.add(table, BorderLayout.CENTER);

@@ -43,7 +43,7 @@ public class administracion extends JFrame {
 	 */
 	public administracion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 415);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,29 +77,47 @@ public class administracion extends JFrame {
 				new ConsultaProyectos().setVisible(true);
 			}
 		});
+		
+		JButton btnApadrinamiento = new JButton("Apadrinamientos");
+		btnApadrinamiento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		JButton btnSocios = new JButton("Socios");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(162)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(agenteBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(edificioBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(niñosBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(edificioBtn, GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(agenteBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnSocios, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+							.addContainerGap())
 						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-							.addComponent(niñosBtn, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addContainerGap(182, Short.MAX_VALUE))
+							.addComponent(btnApadrinamiento, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
+							.addGap(87))))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(38)
-					.addComponent(niñosBtn)
-					.addGap(37)
-					.addComponent(agenteBtn)
-					.addGap(40)
-					.addComponent(edificioBtn)
-					.addContainerGap(44, Short.MAX_VALUE))
+					.addGap(43)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(niñosBtn)
+						.addComponent(btnSocios))
+					.addGap(49)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(agenteBtn)
+						.addComponent(edificioBtn))
+					.addGap(49)
+					.addComponent(btnApadrinamiento)
+					.addContainerGap(139, Short.MAX_VALUE))
 		);
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

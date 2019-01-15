@@ -84,6 +84,7 @@ public class consulta extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "ID", "Lugar de nacimiento", "Lugar de residencia"}));
 		panel.add(comboBox);
+		//comboBox.getSelectedIndex()
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
@@ -131,7 +132,7 @@ public class consulta extends JFrame {
 				
 				int ID = Integer.parseInt(entrada.getText());
 				Beneficiario ben = new Beneficiario(ID);
-				modelo.setRowCount(0);
+				modelo.setRowCount(0);  //Esto borra las entradas de la tabla
 				if(!ben.equals(null)) 
 				{
 					aux = new Persona(ben.getPersonId());
