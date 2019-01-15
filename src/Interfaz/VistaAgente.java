@@ -76,7 +76,7 @@ public class VistaAgente extends JFrame {
 		addressText.setBounds(141, 277, 361, 32);
 		contentPane.add(addressText);
 		
-		projectText = new JTextField();
+		projectText = new JTextField(); //TODO: debe ser un combo box (prioridad media-baja)
 		projectText.setColumns(10);
 		projectText.setBounds(412, 21, 90, 32);
 		contentPane.add(projectText);

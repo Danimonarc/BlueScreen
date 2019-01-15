@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 /*
 import javax.swing.LayoutStyle.ComponentPlacement;
 */
@@ -45,8 +46,9 @@ public class YourPath extends JFrame {
 	 * Create the frame.
 	 */
 	public YourPath() {
+		setTitle("BlueCoes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 528, 380);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -64,9 +66,9 @@ public class YourPath extends JFrame {
 		JPanel panelCentral = new JPanel();
 		contentPane.add(panelCentral, BorderLayout.CENTER);
 		
-		JButton btnAdministracion = new JButton("Administraci\u00F3n");
+		JButton btnAdministracion = new JButton("Contabilidad");
 		
-		JButton btnBase = new JButton("Base de datos");
+		JButton btnBase = new JButton("Administracion");
 		
 		JButton btnUsuario = new JButton("Usuario");
 		
@@ -76,37 +78,33 @@ public class YourPath extends JFrame {
 			}});
 		btnAdministracion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new contabilidad().setVisible(true);
+				new Contabilidad().setVisible(true);
 			}});
 		btnBase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new administracion().setVisible(true);
+				new Administracion().setVisible(true);
 			}});
 		GroupLayout gl_panelCentral = new GroupLayout(panelCentral);
 		gl_panelCentral.setHorizontalGroup(
-			gl_panelCentral.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelCentral.createSequentialGroup()
-					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelCentral.createSequentialGroup()
-							.addGap(47)
-							.addComponent(btnAdministracion, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-							.addGap(93)
-							.addComponent(btnBase, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panelCentral.createSequentialGroup()
-							.addGap(174)
-							.addComponent(btnUsuario)))
-					.addContainerGap(52, Short.MAX_VALUE))
+			gl_panelCentral.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panelCentral.createSequentialGroup()
+					.addGap(127)
+					.addGroup(gl_panelCentral.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnUsuario, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+						.addComponent(btnAdministracion, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+						.addComponent(btnBase, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+					.addGap(129))
 		);
 		gl_panelCentral.setVerticalGroup(
 			gl_panelCentral.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelCentral.createSequentialGroup()
-					.addGap(71)
-					.addGroup(gl_panelCentral.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnAdministracion, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBase, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
-					.addGap(29)
+					.addContainerGap()
+					.addComponent(btnBase, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addGap(34)
+					.addComponent(btnAdministracion, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addGap(34)
 					.addComponent(btnUsuario)
-					.addContainerGap(53, Short.MAX_VALUE))
+					.addContainerGap(106, Short.MAX_VALUE))
 		);
 		panelCentral.setLayout(gl_panelCentral);
 		btnAdministracion.addActionListener(new ActionListener() {
