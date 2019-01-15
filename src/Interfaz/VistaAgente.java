@@ -30,7 +30,6 @@ public class VistaAgente extends JFrame {
 	private JTextField nameText;
 	private JTextField surnameText;
 	private JTextField addressText;
-	private JTextField projectText;
 	private JTextField phoneText;
 	private JTextField jobText;
 	
@@ -38,7 +37,8 @@ public class VistaAgente extends JFrame {
 	private Coordinador coordinator = null;
 	private Persona person = null;
 	private Proyecto project = null;
-	//TODO: private int[] projectIdList; (cuando se listan los proyectos en el combo box, usar esto para guardar los distintos id)
+	private int[] projectIdList = new int[100];
+	private String[] projectNameList = new String[100];
 
 	/**
 	 * Launch the application.
@@ -96,11 +96,6 @@ public class VistaAgente extends JFrame {
 		addressText.setBounds(141, 277, 361, 32);
 		contentPane.add(addressText);
 		
-		projectText = new JTextField(); //TODO: debe ser un combo box (prioridad media-baja)
-		projectText.setColumns(10);
-		projectText.setBounds(412, 21, 90, 32);
-		contentPane.add(projectText);
-		
 		phoneText = new JTextField();
 		phoneText.setColumns(10);
 		phoneText.setBounds(141, 325, 361, 32);
@@ -120,7 +115,7 @@ public class VistaAgente extends JFrame {
 		contentPane.add(IdLabel);
 		
 		JLabel projectLabel = new JLabel("Proyecto:");
-		projectLabel.setBounds(303, 24, 90, 26);
+		projectLabel.setBounds(270, 24, 90, 26);
 		contentPane.add(projectLabel);
 		
 		JLabel addressLabel = new JLabel("Direccion:");
@@ -198,6 +193,24 @@ public class VistaAgente extends JFrame {
 		commentText.setBounds(21, 600, 481, 88);
 		contentPane.add(commentText);
 		
+		JComboBox projectComboBox = new JComboBox();
+		projectComboBox.setBounds(369, 21, 133, 32);
+		contentPane.add(projectComboBox);
+		
+		//set the list of projects in the comboBox
+		int i = 0;
+		for(Proyecto p : Proyecto.ProjectList()) {
+	  		projectNameList[i] = p.getName();
+	  		projectIdList[i] = p.getId();
+	  		i++;
+		}
+		
+		String[] model = new String[i];
+		for(int j=0; j<i;j++) {
+			model[j] = projectNameList[j];
+		}
+		projectComboBox.setModel(new DefaultComboBoxModel(model));
+		
 		JButton acceptButton = new JButton("Aceptar");
 		acceptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
@@ -206,7 +219,7 @@ public class VistaAgente extends JFrame {
 					//WARNING
 				} else {
 					//Form data into variables
-					//TODO: projectId = projectIdList[projectComboBox.getSelectedIndex()];
+					int projectId = projectIdList[projectComboBox.getSelectedIndex()];
 					String name = nameText.getText();
 					String surname = surnameText.getText();
 					String sex = sexComboBox.getSelectedItem().toString();
@@ -220,7 +233,7 @@ public class VistaAgente extends JFrame {
 					String comment = commentText.getText();
 					
 					/*
-					 * TODO: añadir el coordinador (¿Mensaje de confirmacion?)
+					 * TODO: (¿Mensaje de confirmacion?)
 					 */
 					if(id != -1) {  //Update mode (existing data)
 						//Person data update
@@ -247,8 +260,7 @@ public class VistaAgente extends JFrame {
 						new Persona(name, surname, sex, 7, birthDate, entryDate, exitDate, comment);
 
 						//Coordinador(int person_id, int project_id, int privilege, String job, String phoneNumber, String address)
-						//TODO: projectId = projectIdList[projectComboBox.getSelectedIndex()];
-						new Coordinador(id, 1, privilege, job, phoneNumber, address);
+						new Coordinador(id, projectId, privilege, job, phoneNumber, address);
 						
 						//Close the window
 						dispose();
@@ -259,7 +271,6 @@ public class VistaAgente extends JFrame {
 		});
 		acceptButton.setBounds(141, 723, 141, 35);
 		contentPane.add(acceptButton);
-		
 		
 		//Initialize all the fields when updating data
 		if(id != -1) {  //Update mode
@@ -274,8 +285,6 @@ public class VistaAgente extends JFrame {
 			jobText.setText(coordinator.getJob());
 			commentText.setText(person.getComments());
 			
-			projectText.setText(project.getName()); //should be changed to comboBox
-			
 			//Dates
 			birthDateChooser.setDate(person.getBirthDate());
 			entryDateChooser.setDate(person.getEntryDate());
@@ -284,18 +293,6 @@ public class VistaAgente extends JFrame {
 			//Combo Boxes
 			sexComboBox.setSelectedItem(person.getSex());
 			privilegeComboBox.setSelectedIndex(coordinator.getPrivilege()); //0=socio, 1=agente, 2=administrador  (privilegios temporales)
-			
-			//TODO: set the list of projects in the comboBox
-			/* projectComboBox.setModel(
-			 * 		int i = 0;
-			 * 		foreach(project p : projectList()){
-			 * 			TextModel.add(p.getName());
-			 * 			projectIdList[i] = p.getId();
-			 * 			i++;
-			 * 		}
-			 *	);
-			*/
-		}
-		
+		}	
 	}
 }
