@@ -330,7 +330,7 @@ public class VistaNino extends JFrame {
 						}
 						if(!(fechaEn.getDate()==null)) {
 							entryDate = fechaEn.getDate();  //Controlamos si las fechas son nulas 
-						} 												  //para controlar excepciones
+						}
 						if(!(fechaSal.getDate()==null)) {
 							exitDate = fechaSal.getDate();
 						}
@@ -387,7 +387,8 @@ public class VistaNino extends JFrame {
 //			BOTON DE VOLVER
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();}});
+				dispose();
+				}});
 		panel_1.setLayout(gl_panel_1);
 	}
 }

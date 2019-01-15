@@ -32,6 +32,7 @@ public class ConsultaAgente extends JFrame {
 	private JTextField searchText;
 	private JTable table;
 	private Object[] bena;
+	private int id;
 
 	/**
 	 * Launch the application.
@@ -83,7 +84,7 @@ public class ConsultaAgente extends JFrame {
 		panel_1.add(addButton);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new VistaAgente().setVisible(true);
+				new VistaAgente(-1).setVisible(true); //-1 to specify add instead of update
 			}
 		});
 		
@@ -144,7 +145,8 @@ public class ConsultaAgente extends JFrame {
 		
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new VistaAgente().setVisible(true);
+				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+				new VistaAgente(id).setVisible(true);
 			}
 		});
 

@@ -12,9 +12,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.TextField;
 import com.toedter.calendar.JDateChooser;
+
+import prototype.*;
+
 import javax.swing.JTextArea;
 
 public class VistaAgente extends JFrame {
@@ -35,7 +41,7 @@ public class VistaAgente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VistaAgente frame = new VistaAgente();
+					VistaAgente frame = new VistaAgente(-1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +53,23 @@ public class VistaAgente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaAgente() {
+	public VistaAgente(int id) {
+		//initialization of all the objects related with this person
+		Coordinador coordinator = null;
+		Persona person = null;
+		Proyecto project = null;
+		
+		if(id != -1) {
+			coordinator = new Coordinador(id);
+			person = new Persona(id);
+			project = new Proyecto(coordinator.getProjectId());
+		}
+		
+		Date birthDate = null;
+		Date entryDate = null;
+		Date exitDate = null;
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		
 		setTitle("Coordinador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 850);
@@ -57,6 +79,7 @@ public class VistaAgente extends JFrame {
 		contentPane.setLayout(null);
 		
 		idText = new JTextField();
+		idText.setEditable(false);
 		idText.setBounds(141, 21, 90, 32);
 		contentPane.add(idText);
 		idText.setColumns(10);
@@ -90,23 +113,29 @@ public class VistaAgente extends JFrame {
 		acceptButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/*
-				 * TODO: añadir el coordinador y cerrar la pestaña (¿Mensaje de confirmacion?)
+				 * TODO: añadir el coordinador (¿Mensaje de confirmacion?)
 				 */
+				if(id != -1) {  //Update mode (existing data)
+					
+					dispose();
+					
+				} else {  //Add mode (non-existing data)
+					
+					dispose();
+				}
 			}
 		});
 		acceptButton.setBounds(141, 723, 141, 35);
 		contentPane.add(acceptButton);
 		
-		JButton cancelButton = new JButton("Cancelar");
-		cancelButton.addActionListener(new ActionListener() {
+		JButton exitButton = new JButton("Salir");
+		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 * TODO: Cerrar la ventana y volver a la anterior
-				 */
+				dispose();
 			}
 		});
-		cancelButton.setBounds(303, 723, 141, 35);
-		contentPane.add(cancelButton);
+		exitButton.setBounds(303, 723, 141, 35);
+		contentPane.add(exitButton);
 		
 		JLabel IdLabel = new JLabel("Id:");
 		IdLabel.setBounds(21, 24, 125, 26);
@@ -182,14 +211,47 @@ public class VistaAgente extends JFrame {
 		exitDateChooser.setBounds(141, 513, 147, 32);
 		contentPane.add(exitDateChooser);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"hombre", "mujer"}));
-		comboBox.setBounds(141, 180, 125, 32);
-		contentPane.add(comboBox);
+		JComboBox sexComboBox = new JComboBox();
+		sexComboBox.setModel(new DefaultComboBoxModel(new String[] {"hombre", "mujer"}));
+		sexComboBox.setBounds(141, 180, 125, 32);
+		contentPane.add(sexComboBox);
 		
 		JTextArea commentText = new JTextArea();
 		commentText.setBounds(21, 600, 481, 88);
 		contentPane.add(commentText);
+		
+		//Initialize all the fields when updating data
+		if(id != -1) {  //Update mode
+			//Non-editable
+			idText.setText(Integer.toString(id));
+			
+			//Text boxes
+			nameText.setText(person.getName());
+			surnameText.setText(person.getSurname());
+			addressText.setText(coordinator.getAddress());
+			phoneText.setText(coordinator.getPhoneNumber());
+			jobText.setText(coordinator.getJob());
+			commentText.setText(person.getComments());
+			
+			projectText.setText(project.getName()); //should be changed to comboBox
+			
+			//Dates
+			birthDateChooser.setDate(person.getBirthDate());
+			entryDateChooser.setDate(person.getEntryDate());
+			exitDateChooser.setDate(person.getExitDate());
+			
+			//Combo Boxes
+			sexComboBox.setSelectedItem(person.getSex());
+			privilegeComboBox.setSelectedIndex(coordinator.getPrivilege()); //0=socio, 1=agente, 2=administrador  (privilegios temporales)
+			
+			//TODO: set the list of projects in the comboBox
+			/* projectComboBox.setModel(
+			 * 		foreach(project p : projectList()){
+			 * 			TextModel.add(p.getName());
+			 * 		}
+			 *	);
+			*/
+		}
 		
 	}
 }
