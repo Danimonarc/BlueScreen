@@ -25,7 +25,7 @@ import prototype.Proyecto;
 public class ConsultaProyectos extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField entrada;
+	private JTextField searchText;
 	private JTable table;
 	private Object[] bena;
 	/**
@@ -49,7 +49,7 @@ public class ConsultaProyectos extends JFrame {
 	 */
 	public ConsultaProyectos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -59,38 +59,38 @@ public class ConsultaProyectos extends JFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		entrada = new JTextField();
-		panel.add(entrada);
-		entrada.setColumns(10);
+		searchText = new JTextField();
+		panel.add(searchText);
+		searchText.setColumns(10);
 		
-		JButton botonAceptar = new JButton("Buscar");
-		panel.add(botonAceptar);
+		JButton searchButton = new JButton("Buscar");
+		panel.add(searchButton);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "ID", "Lugar de nacimiento", "Lugar de residencia"}));
-		panel.add(comboBox);
+		JComboBox searchComboBox = new JComboBox();
+		searchComboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "ID", "Lugar de nacimiento", "Lugar de residencia"}));
+		panel.add(searchComboBox);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		//JButton modificar = new JButton("Modificar");
-		//panel_1.add(modificar);
-		
-		JButton eliminar = new JButton("Eliminar\r\n");
-		panel_1.add(eliminar);
-		
-		JButton btnVolver = new JButton("Volver");
-		panel_1.add(btnVolver);
-		String[] colums = {"Id", "Nombre", "Lugar"};
-		
-		/*JButton btnAdd = new JButton("A\u00F1adir");
-		panel_1.add(btnAdd);
-		btnAdd.addActionListener(new ActionListener() {
+		JButton addButton = new JButton("A\u00F1adir");
+		panel_1.add(addButton);
+		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//new VistaProyecto(null).setVisible(true);
 			}
 		});
-		*/
+		
+		JButton updateButton = new JButton("Ver/Modificar");
+		panel_1.add(updateButton);
+		
+		JButton deleteButton = new JButton("Eliminar\r\n");
+		panel_1.add(deleteButton);
+		
+		JButton backButton = new JButton("Volver");
+		panel_1.add(backButton);
+		String[] colums = {"Id", "Nombre", "Lugar"};
+		
 		JTable table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(new DefaultTableModel(
@@ -110,10 +110,10 @@ public class ConsultaProyectos extends JFrame {
 		}
 		
 		
-		botonAceptar.addActionListener(new ActionListener() {
+		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				int ID = Integer.parseInt(entrada.getText());
+				int ID = Integer.parseInt(searchText.getText());
 				Proyecto ben = new Proyecto(ID);
 				modelo.setRowCount(0);
 				if(!ben.equals(null)) 
@@ -127,8 +127,8 @@ public class ConsultaProyectos extends JFrame {
 			}});
 		
 		
-		/*
-		modificar.addActionListener(new ActionListener() {
+		
+		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
@@ -138,8 +138,8 @@ public class ConsultaProyectos extends JFrame {
 				
 				
 			}});
-*/
-		eliminar.addActionListener(new ActionListener() {
+
+		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
@@ -148,7 +148,7 @@ public class ConsultaProyectos extends JFrame {
 		
 		
 		contentPane.add(table, BorderLayout.CENTER);
-		btnVolver.addActionListener(new ActionListener() {
+		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();}});
 	

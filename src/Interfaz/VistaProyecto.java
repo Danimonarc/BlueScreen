@@ -81,7 +81,7 @@ public class VistaProyecto extends JFrame {
 				}
 				else 
 				{
-					//TODO: añadir el proyecto a la base de datos
+					//TODO: añadir el proyecto y cerrar la ventana (¿Notificacion de exito?)
 				}
 			}
 		});

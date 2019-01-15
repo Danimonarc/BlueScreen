@@ -69,7 +69,7 @@ public class ConsultaAgente extends JFrame {
 		panel.add(botonAceptar);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Numero de telefono"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Id", "Proyecto"}));
 		panel.add(comboBox);
 		
 		JPanel panel_1 = new JPanel();
@@ -91,7 +91,8 @@ public class ConsultaAgente extends JFrame {
 		
 		JButton btnVolver = new JButton("Volver");
 		panel_1.add(btnVolver);
-		String[] colums = {"Nombre", "Fecha de nacimiento", "Localidad"};
+		
+		String[] colums = {"Id", "Nombre", "Apellidos"};
 		
 		JTable table = new JTable();
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -105,10 +106,13 @@ public class ConsultaAgente extends JFrame {
 		//cambiar aqui a proyecto
 		table.setCellSelectionEnabled(true);
 		DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-		for (Coordinador b :Coordinador.AgentList()) 
+		for (Coordinador coordinator :Coordinador.AgentList()) 
 		{
-			Object[] bena = {new Persona(b.getPersonId()).getName(),b.getPhoneNumber(),b.getPersonId()};
-			modelo.addRow(bena);
+			Persona person = new Persona(coordinator.getPersonId());
+			Object[] entry = {
+					person.getId(),person.getName(),person.getSurname()
+					};
+			modelo.addRow(entry);
 		}
 		
 		

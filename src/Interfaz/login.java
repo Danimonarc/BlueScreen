@@ -16,6 +16,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPasswordField;
+import java.awt.Window.Type;
 
 public class login extends JFrame {
 
@@ -43,7 +44,7 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
-		setTitle("ACOES\r\n");
+		setTitle("BlueCoes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
