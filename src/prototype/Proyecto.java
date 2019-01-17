@@ -42,7 +42,7 @@ public class Proyecto {
     {       	
     	// Crea el objeto y lo inserta en la base de datos
         DB myDB = new DB(DB_SERVER,DB_NAME);
-        myDB.Insert("INSERT INTO Proyecto VALUES(" + id + ", '" + location + "');");
+        myDB.Insert("INSERT INTO Proyecto VALUES('" + location + "', '" + name + "');");
         
         // Para obtener el ID asignado al proyecto
         Object[] tupla = myDB.Select("SELECT @@IDENTITY").get(0);
@@ -89,6 +89,13 @@ public class Proyecto {
         DB myDB = new DB(DB_SERVER,DB_NAME);
         myDB.Update("UPDATE Proyecto SET nombre= " + name + " WHERE id = " + this.id + ";");
         this.name = name;
+    }
+    
+    public void setLocation(String location) 
+    {
+        DB myDB = new DB(DB_SERVER,DB_NAME);
+        myDB.Update("UPDATE Proyecto SET localizacion= " + location + " WHERE id = " + this.id + ";");
+        this.location = location;
     }
 
     /*---------------------------------------------------------------*/
