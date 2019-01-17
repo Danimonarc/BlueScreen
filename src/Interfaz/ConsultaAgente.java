@@ -153,15 +153,18 @@ public class ConsultaAgente extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
-				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new Coordinador(id).DeleteAgent();
-			}});
+				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+				new Persona(id).DeletePerson();
+			}
+		});
 		
 		
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();}});
+				dispose();
+			}
+		});
 	}
 
 }

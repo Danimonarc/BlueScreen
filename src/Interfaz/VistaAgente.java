@@ -60,7 +60,7 @@ public class VistaAgente extends JFrame {
 	 * Create the frame.
 	 */
 	public VistaAgente(int id) {
-		//initialization of all the objects related with this person
+		//initialization of all the objects related with this person (only update mode)
 		if(id != -1) {
 			coordinator = new Coordinador(id);
 			person = new Persona(id);
@@ -246,7 +246,7 @@ public class VistaAgente extends JFrame {
 						person.setComments(comment);
 						
 						//Coordinator data update
-						//coordinator.setProjectId(projectId);
+						coordinator.setProjectId(projectId);
 						coordinator.setPrivilege(privilege);
 						coordinator.setJob(job);
 						coordinator.setPhoneNumber(phoneNumber);

@@ -30,6 +30,7 @@ public class ConsultaProyectos extends JFrame {
 	private JTextField searchText;
 	private JTable table;
 	private Object[] bena;
+	private int id;
 	/**
 	 * Launch the application.
 	 */
@@ -79,7 +80,7 @@ public class ConsultaProyectos extends JFrame {
 		panel_1.add(addButton);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//new VistaProyecto(null).setVisible(true);
+				new VistaProyecto(-1).setVisible(true); //-1 to specify add instead of update
 			}
 		});
 		
@@ -135,21 +136,18 @@ public class ConsultaProyectos extends JFrame {
 		
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int id;
-				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 2).toString());
-				new VistaNino(new Beneficiario(id)).setVisible(true);
-				
-				
-				
-				
-			}});
+				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
+				new VistaProyecto(id).setVisible(true);
+			}
+		});
 
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int id;
 				id = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
 				new Proyecto(id).DeleteProject();
-				}});
+			}
+		});
 		
 		
 		contentPane.add(scrollPane, BorderLayout.CENTER);
